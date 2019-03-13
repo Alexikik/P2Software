@@ -12,3 +12,10 @@ C:\Users\Alex\OneDrive - Aalborg Universitet\VisualStudio\Projekt\GameBoard\Game
 C:\Users\Alex\OneDrive - Aalborg Universitet\VisualStudio\Projekt\GameBoard\GameBoard\obj\Debug\GameBoard.csproj.CoreCompileInputs.cache
 C:\Users\Alex\OneDrive - Aalborg Universitet\VisualStudio\Projekt\GameBoard\GameBoard\obj\Debug\GameBoard.exe
 C:\Users\Alex\OneDrive - Aalborg Universitet\VisualStudio\Projekt\GameBoard\GameBoard\obj\Debug\GameBoard.pdb
+C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\GameBoard\bin\Debug\GameBoard.exe.config
+C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\GameBoard\bin\Debug\GameBoard.exe
+C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\GameBoard\bin\Debug\GameBoard.pdb
+C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\GameBoard\obj\Debug\GameBoard.csprojAssemblyReference.cache
+C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\GameBoard\obj\Debug\GameBoard.csproj.CoreCompileInputs.cache
+C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\GameBoard\obj\Debug\GameBoard.exe
+C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\GameBoard\obj\Debug\GameBoard.pdb

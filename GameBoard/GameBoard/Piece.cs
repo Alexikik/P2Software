@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace GameBoard
 {
-    class Piece
+    public class Piece
     {
         public int player;  // 1:green, 2: red, 3:blue, 4:yellow
         public allFields placement;
@@ -26,18 +26,9 @@ namespace GameBoard
 
         private PictureBox MakePiece(allFields field)
         {
-            /*PictureBox Piece = new PictureBox();
-            piece.Parent = game
-            //Piece.Image = Image.FromFile(@"C:\Users\Alexi\Desktop\Red.png");
-            Piece.Image = Image.FromFile(@"C:\Users\Alex\OneDrive - Aalborg Universitet\VisualStudio\Projekt\GameBoard\GameBoard\Images\Red.png");
-            //Piece.Image = Image.FromFile(@"C:\Users\Alex\OneDrive - Aalborg Universitet\VisualStudio\Projekt\GameBoard\GameBoard\Images\RedCircle.png");
-            Piece.Size = new Size(30, 30);
-            Piece.Location = new Point(field.x, field.y);
-            //Piece.BackColor = Color.Transparent;*/
-
             PictureBox Piece = new PictureBox();
-            Piece.Image = Image.FromFile(@"C:\Users\Alex\OneDrive - Aalborg Universitet\VisualStudio\Projekt\GameBoard\GameBoard\Images\Red.png");
-            Piece.Size = new Size(30, 30);
+            Piece.Image = Image.FromFile(@"C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\GameBoard\Images\Red.png");
+            Piece.Size = new Size(29, 29);
             Piece.Location = new Point(field.x, field.y);
 
             return Piece;

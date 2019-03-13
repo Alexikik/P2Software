@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameBoard
 {
-    abstract class allFields
+    public abstract class allFields
     {
         public int x;
         public int y;
@@ -21,20 +21,25 @@ namespace GameBoard
             y = y1;
             index = i;
         }
-        //public allFields(Piece p)
-        //{
-        //    if (p1 == null) 
-        //        p1 = p;
-        //} 
     }
 
-    class normalField : allFields
+    public class normalField : allFields
     {
         public normalField(int x1, int y1, int i) : base(x1, y1, i) { }
     }
 
-    class starField : allFields
+    public class starField : allFields
     {
         public starField(int x1, int y1, int i) : base(x1, y1, i) { }
+    }
+
+    public class homeField : allFields
+    {
+        public homeField(int x1, int y1, int i) : base(x1, y1, i) { }
+    }
+
+    public class pathField : allFields
+    {
+        public pathField(int x1, int y1, int i) : base(x1, y1, i) { }
     }
 }

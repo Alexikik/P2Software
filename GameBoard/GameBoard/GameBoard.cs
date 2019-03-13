@@ -90,8 +90,7 @@ namespace GameBoard
                 boardFields.Add(new normalField(859 + 15 - i * 65, 535 + 15, index++));
             for (int i = 0; i < 2; i++)
                 boardFields.Add(new normalField(665 + 15 - i * 65, 535 + 15, index++));
-            //boardFields.Add(new starField(665 + 15 - 2 * 65, 535 + 15, index++));
-            boardFields.Add(new starField(535 + 15, 600 + 15, index++));
+            boardFields.Add(new starField(535 + 15, 600 + 15, index++));              // red/blue star
             boardFields.Add(new normalField(535 + 15, 600 + 15 + 65, index++));
             for (int i = 0; i < 3; i++)
                 boardFields.Add(new normalField(535 + 15, 729 + 15 + i * 65, index++));

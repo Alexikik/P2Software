@@ -21,27 +21,29 @@ namespace GameBoard
         public GameBoard()
         {
             // Setup
-            this.Height = 1039;
-            this.Width = 1400;
+            this.Height = 839;
+            this.Width = 1200;
             SetupFields();
             SetupAllHomeFields();
             //SetupAllPathFields();
 
             // Ludo image
             PictureBox gameBoard = new PictureBox();
+            gameBoard.SizeMode = PictureBoxSizeMode.StretchImage;    // Streches the image
             gameBoard.Image = Image.FromFile("Images/LudoPlade.png");
-            gameBoard.Size = new Size(1000, 1000);
+            gameBoard.Size = new Size(800, 800);
+
 
             // Move one field forward button
             Button btn = new Button();
             btn.Size = new Size(60, 30);
-            btn.Location = new Point(1200, 200);
+            btn.Location = new Point(1000, 200);
             btn.Text = "Next";
 
             // Move one field back button
             Button btnBack = new Button();
             btnBack.Size = new Size(60, 30);
-            btnBack.Location = new Point(1100, 200);
+            btnBack.Location = new Point(900, 200);
             btnBack.Text = "Back";
 
             // Add one red piece

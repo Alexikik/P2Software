@@ -225,3 +225,5 @@ GameBoard/.vs/GameBoard/v15/.suo
 Gameboard/.vs/*
 *.suo
 *.ide-shm
+*.cache
+**/obj/*

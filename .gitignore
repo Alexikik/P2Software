@@ -223,3 +223,5 @@ GameBoard/.vs/GameBoard/v15/.suo
 *.ide-shm
 *.ide-wal
 Gameboard/.vs/*
+*.suo
+*.ide-shm

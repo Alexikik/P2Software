@@ -21,8 +21,8 @@ namespace GameBoard
         public GameBoard()
         {
             // Setup
-            this.Height = 839;
-            this.Width = 1200;
+            this.Height = 804;
+            this.Width = 1204;
             SetupFields();
             SetupAllHomeFields();
             //SetupAllPathFields();

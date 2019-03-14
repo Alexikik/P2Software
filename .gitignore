@@ -222,4 +222,4 @@ project.lock.json
 GameBoard/.vs/GameBoard/v15/.suo
 *.ide-shm
 *.ide-wal
-.vs
+Gameboard/.vs/*

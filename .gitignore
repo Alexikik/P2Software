@@ -21,3 +21,16 @@ GameBoard/GameBoard/obj/Debug/GameBoard.exe
 GameBoard/GameBoard/obj/Debug/GameBoard.pdb
 GameBoard/GameBoard/obj/Debug/GameBoard.csproj.CoreCompileInputs.cache
 GameBoard/.vs/GameBoard/v15/.suo
+*.ide-shm
+GameBoard/GameBoard/obj/Debug/GameBoard.pdb
+GameBoard/GameBoard/obj/Debug/GameBoard.exe
+GameBoard/GameBoard/obj/Debug/DesignTimeResolveAssemblyReferences.cache
+GameBoard/GameBoard/bin/Debug/GameBoard.pdb
+GameBoard/GameBoard/bin/Debug/GameBoard.exe
+GameBoard/.vs/GameBoard/v15/Server/sqlite3/storage.ide-shm
+GameBoard/.vs/GameBoard/v15/.suo
+*.pdb
+*.exe
+*.cache
+*.ide-shm
+GameBoard/.vs/GameBoard/v15/.suo

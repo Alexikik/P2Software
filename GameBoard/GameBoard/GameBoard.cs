@@ -31,7 +31,7 @@ namespace GameBoard
             PictureBox gameBoard = new PictureBox();
             gameBoard.SizeMode = PictureBoxSizeMode.StretchImage;    // Streches the image
             gameBoard.Image = Image.FromFile("Images/LudoPlade.png");
-            gameBoard.Size = new Size(800, 800);
+            gameBoard.Size = new Size(765, 765);
 
 
             // Move one field forward button

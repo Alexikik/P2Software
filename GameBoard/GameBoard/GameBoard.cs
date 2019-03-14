@@ -29,7 +29,7 @@ namespace GameBoard
 
             // Ludo image
             PictureBox gameBoard = new PictureBox();
-            gameBoard.Image = Image.FromFile(@"C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\GameBoard\Images\LudoPlade.png");
+            gameBoard.Image = Image.FromFile("Images/LudoPlade.png");
             gameBoard.Size = new Size(1000, 1000);
 
             // Move one field forward button

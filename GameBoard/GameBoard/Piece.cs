@@ -27,7 +27,7 @@ namespace GameBoard
         private PictureBox MakePiece(allFields field)
         {
             PictureBox Piece = new PictureBox();
-            Piece.Image = Image.FromFile(@"C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\GameBoard\Images\Red.png");
+            Piece.Image = Image.FromFile("Images/Red.png");
             Piece.Size = new Size(29, 29);
             Piece.Location = new Point(field.x, field.y);
 

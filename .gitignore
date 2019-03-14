@@ -13,3 +13,6 @@ GameBoard/GameBoard/bin/Debug/GameBoard.pdb
 GameBoard/GameBoard/obj/Debug/GameBoard.pdb
 GameBoard/GameBoard/bin/Debug/GameBoard.exe
 GameBoard/.vs/GameBoard/v15/.suo
+*.cache
+*.ide-wal
+*.ide-shm

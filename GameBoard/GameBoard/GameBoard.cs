@@ -47,8 +47,8 @@ namespace GameBoard
             btnBack.Text = "Back";
 
             // Add one red piece
-            redPieces.Add(new Piece(2, boardFields[2]));
-            //redPieces.Add(new Piece(2, allHomeFields[3]));
+            //redPieces.Add(new Piece(2, boardFields[2]));
+            redPieces.Add(new Piece(2, allHomeFields[6]));
 
             // Controls
             Controls.Add(btn);
@@ -78,52 +78,57 @@ namespace GameBoard
         private void SetupFields()
         {
             int index = 0;
+            int offset = 10;
 
             for (int i = 0; i < 6; i++)
-                boardFields.Add(new normalField(535 + 15, 18 + 15 + i * 64, index++));
-            boardFields.Add(new starField(600 + 15, 406 + 15, index++));                // green/red star
-            boardFields.Add(new normalField(600 + 15 + 65, 406 + 15, index++));
-            for (int i = 0; i < 3; i++)
-                boardFields.Add(new normalField(730 + 15 + i * 65, 406 + 15, index++));
-            boardFields.Add(new normalField(923 + 15, 406 + 15, index++));                
-            boardFields.Add(new starField(923 + 15, 406 + 15 + 64, index++));         // red star
-            boardFields.Add(new normalField(923 + 15, 535 + 15, index++));
-            for (int i = 0; i < 3; i++)
-                boardFields.Add(new normalField(859 + 15 - i * 65, 535 + 15, index++));
+                boardFields.Add(new normalField(409 + offset, 13 + offset + i * 50, index++));
+            boardFields.Add(new starField(458 + offset, 310 + offset, index++));                // green/red star
+            boardFields.Add(new normalField(508 + offset, 310 + offset, index++));
+            boardFields.Add(new normalField(558 + offset, 310 + offset, index++));
+            boardFields.Add(new globeField(608 + offset, 310 + offset, index++));
             for (int i = 0; i < 2; i++)
-                boardFields.Add(new normalField(665 + 15 - i * 65, 535 + 15, index++));
-            boardFields.Add(new starField(535 + 15, 600 + 15, index++));              // red/blue star
-            boardFields.Add(new normalField(535 + 15, 600 + 15 + 65, index++));
+                boardFields.Add(new normalField(657 + offset + i * 50, 310 + offset, index++)); // UNTIL HERE IS RIGHT!!!
+
+            boardFields.Add(new normalField(923 + offset, 406 + offset, index++));                
+            boardFields.Add(new starField(923 + offset, 406 + offset + 64, index++));         // red star
+            boardFields.Add(new normalField(923 + offset, 535 + offset, index++));
             for (int i = 0; i < 3; i++)
-                boardFields.Add(new normalField(535 + 15, 729 + 15 + i * 65, index++));
-            boardFields.Add(new normalField(535 + 15, 923 + 15, index++));
-            boardFields.Add(new starField(535 + 15 - 65, 923 + 15, index++));         // blue star
+                boardFields.Add(new normalField(859 + offset - i * 65, 535 + offset, index++));
+            for (int i = 0; i < 2; i++)
+                boardFields.Add(new normalField(665 + offset - i * 65, 535 + offset, index++));
+            boardFields.Add(new starField(535 + offset, 600 + offset, index++));              // red/blue star
+            boardFields.Add(new normalField(535 + offset, 600 + offset + 65, index++));
+            for (int i = 0; i < 3; i++)
+                boardFields.Add(new normalField(535 + offset, 729 + offset + i * 65, index++));
+            boardFields.Add(new normalField(535 + offset, 923 + offset, index++));
+            boardFields.Add(new starField(535 + offset - 65, 923 + offset, index++));         // blue star
         }
 
         private void SetupAllHomeFields()
         {
             int index = 0;
+            int offset = 10;
 
             // Green
             for (int i = 0; i < 2; i++)
-                allHomeFields.Add(new homeField(613 + 15 + i * 65, 82 + 15, index++));
+                allHomeFields.Add(new homeField(469 + offset + i * 49, 63 + offset, index++));
             for (int i = 0; i < 2; i++)
-                allHomeFields.Add(new homeField(613 + 15 + i * 65, 147 + 15, index++));
+                allHomeFields.Add(new homeField(469 + offset + i * 49, 63+49 + offset, index++));
             // Red
             for (int i = 0; i < 2; i++)
-                allHomeFields.Add(new homeField(794 + 15 + i * 65, 613 + 15, index++)); 
+                allHomeFields.Add(new homeField(608 + offset + i * 49, 469 + offset, index++)); 
             for (int i = 0; i < 2; i++)
-                allHomeFields.Add(new homeField(794 + 15 + i * 65, 678 + 15, index++));
+                allHomeFields.Add(new homeField(608 + offset + i * 49, 469+49 + offset, index++));
             // Blue
             for (int i = 0; i < 2; i++)
-                allHomeFields.Add(new homeField(263 + 15 + i * 65, 794 + 15, index++));
+                allHomeFields.Add(new homeField(263 + offset + i * 49, 794 + offset, index++));
             for (int i = 0; i < 2; i++)
-                allHomeFields.Add(new homeField(263 + 15 + i * 65, 859 + 15, index++));
+                allHomeFields.Add(new homeField(263 + offset + i * 49, 859 + offset, index++));
             // Yellow
             for (int i = 0; i < 2; i++)
-                allHomeFields.Add(new homeField(82 + 15 + i * 65, 262 + 15, index++));
+                allHomeFields.Add(new homeField(82 + offset + i * 49, 262 + offset, index++));
             for (int i = 0; i < 2; i++)
-                allHomeFields.Add(new homeField(82 + 15 + i * 65, 327 + 15, index++));
+                allHomeFields.Add(new homeField(82 + offset + i * 49, 327 + offset, index++));
         }
 
         private void SetupAllPathFields()

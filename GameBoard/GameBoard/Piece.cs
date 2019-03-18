@@ -28,7 +28,7 @@ namespace GameBoard
         {
             PictureBox Piece = new PictureBox();
             Piece.Image = Image.FromFile("Images/Red.png");
-            Piece.Size = new Size(29, 29);
+            Piece.Size = new Size(26, 26);
             Piece.Location = new Point(field.x, field.y);
 
             return Piece;

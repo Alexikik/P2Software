@@ -42,4 +42,9 @@ namespace GameBoard
     {
         public pathField(int x1, int y1, int i) : base(x1, y1, i) { }
     }
+
+    public class globeField : allFields
+    {
+        public globeField(int x1, int y1, int i) : base(x1, y1, i) { }
+    }
 }

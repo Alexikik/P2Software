@@ -10,7 +10,7 @@ namespace GameBoard
 {
     public class Piece
     {
-        public int player;  // 1:green, 2: red, 3:blue, 4:yellow
+        public int player;  // 1:green, 2:red, 3:blue, 4:yellow
         public allFields placement;
 
         public PictureBox piece;

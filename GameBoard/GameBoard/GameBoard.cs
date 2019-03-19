@@ -10,25 +10,28 @@ namespace GameBoard
 {
     public class GameBoard : Form
     {
-        public List<Piece> redPieces = new List<Piece>();
+        //public List<Piece> redPieces = new List<Piece>();
         public List<allFields> boardFields = new List<allFields>();
         public List<homeField> allHomeFields = new List<homeField>();
         public List<pathField> pathPlayerGreen = new List<pathField>();
         public List<pathField> pathPlayerRed = new List<pathField>();
         public List<pathField> pathPlayerBlue = new List<pathField>();
         public List<pathField> pathPlayerYellow = new List<pathField>();
+        public List<Player> players;
+        PictureBox gameBoard;
 
-        public GameBoard()
+        public GameBoard(List<Player> players)
         {
             // Setup
             this.Height = 804;
             this.Width = 1204;
+            this.players = players;
             SetupFields();
             SetupAllHomeFields();
             //SetupAllPathFields();
 
             // Ludo image
-            PictureBox gameBoard = new PictureBox();
+            gameBoard = new PictureBox();
             gameBoard.SizeMode = PictureBoxSizeMode.StretchImage;    // Streches the image
             gameBoard.Image = Image.FromFile("Images/LudoPlade.png");
             gameBoard.Size = new Size(765, 765);
@@ -47,14 +50,12 @@ namespace GameBoard
             btnBack.Text = "Back";
 
             // Add one red piece
-            redPieces.Add(new Piece(2, boardFields[1]));
+            //redPieces.Add(new Piece(2, boardFields[1]));
             //redPieces.Add(new Piece(2, allHomeFields[6]));
 
             // Controls
             Controls.Add(btn);
             Controls.Add(btnBack);
-            Controls.Add(redPieces[0].piece);
-            Controls.Add(gameBoard);
 
             // Events
             btn.Click += btn_Click;
@@ -64,15 +65,27 @@ namespace GameBoard
 
         private void btn_Click(object sender, EventArgs e)
         {
-            movePiece(redPieces[0], 1);
+            movePiece(players[0].pieces[0], 1);
 
         }
         private void btnBack_Click(object sender, EventArgs e)
         {
-            movePiece(redPieces[0], -1);
+            movePiece(players[0].pieces[0], -1);
         }
 
-
+        public void SetupControls()
+        {
+            //Controls.Add(redPieces[0].piece);
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    Controls.Add(players[i].pieces[j].piece);
+                }
+            }
+            
+            Controls.Add(gameBoard);
+        }
 
 
         private void SetupFields()
@@ -120,9 +133,9 @@ namespace GameBoard
                 allHomeFields.Add(new homeField(608 + offset + i * 49, 469+49 + offset, index++));
             // Blue
             for (int i = 0; i < 2; i++)
-                allHomeFields.Add(new homeField(263 + offset + i * 49, 794 + offset, index++));
+                allHomeFields.Add(new homeField(263 + offset + i * 49, 600 + offset, index++));
             for (int i = 0; i < 2; i++)
-                allHomeFields.Add(new homeField(263 + offset + i * 49, 859 + offset, index++));
+                allHomeFields.Add(new homeField(263 + offset + i * 49, 650 + offset, index++));
             // Yellow
             for (int i = 0; i < 2; i++)
                 allHomeFields.Add(new homeField(82 + offset + i * 49, 262 + offset, index++));

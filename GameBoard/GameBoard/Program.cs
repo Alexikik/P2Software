@@ -9,17 +9,12 @@ using System.Windows.Forms;
 
 namespace GameBoard
 {
-    class Program
+    public class Program
     {
         [STAThread]
         static void Main(string[] args)
         {
-            GameBoard Ludo = new GameBoard();
-
-            //Ludo.movePiece(Ludo.redPieces[0], 1, Ludo.boardFields);
-
-            Application.EnableVisualStyles();
-            Application.Run(Ludo);
+            GameManager LudoManager = new GameManager();
         }
     }
 }

@@ -47,8 +47,8 @@ namespace GameBoard
             btnBack.Text = "Back";
 
             // Add one red piece
-            //redPieces.Add(new Piece(2, boardFields[2]));
-            redPieces.Add(new Piece(2, allHomeFields[6]));
+            redPieces.Add(new Piece(2, boardFields[1]));
+            //redPieces.Add(new Piece(2, allHomeFields[6]));
 
             // Controls
             Controls.Add(btn);
@@ -80,28 +80,27 @@ namespace GameBoard
             int index = 0;
             int offset = 10;
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 6; i++) // Insert globefield
                 boardFields.Add(new normalField(409 + offset, 13 + offset + i * 50, index++));
             boardFields.Add(new starField(458 + offset, 310 + offset, index++));                // green/red star
             boardFields.Add(new normalField(508 + offset, 310 + offset, index++));
             boardFields.Add(new normalField(558 + offset, 310 + offset, index++));
             boardFields.Add(new globeField(608 + offset, 310 + offset, index++));
             for (int i = 0; i < 2; i++)
-                boardFields.Add(new normalField(657 + offset + i * 50, 310 + offset, index++)); // UNTIL HERE IS RIGHT!!!
-
-            boardFields.Add(new normalField(923 + offset, 406 + offset, index++));                
-            boardFields.Add(new starField(923 + offset, 406 + offset + 64, index++));         // red star
-            boardFields.Add(new normalField(923 + offset, 535 + offset, index++));
+                boardFields.Add(new normalField(657 + offset + i * 50, 310 + offset, index++));         
+            boardFields.Add(new starField(706 + offset, 360 + offset, index++));         // red star
+            boardFields.Add(new normalField(706 + offset, 409 + offset, index++));
+            boardFields.Add(new globeField(657 + offset, 409 + offset, index++));
             for (int i = 0; i < 3; i++)
-                boardFields.Add(new normalField(859 + offset - i * 65, 535 + offset, index++));
+                boardFields.Add(new normalField(607 + offset - i * 50, 409 + offset, index++));
+            boardFields.Add(new normalField(458 + offset, 409 + offset, index++));
+            boardFields.Add(new starField(409 + offset, 458 + offset, index++));              // red/blue star
             for (int i = 0; i < 2; i++)
-                boardFields.Add(new normalField(665 + offset - i * 65, 535 + offset, index++));
-            boardFields.Add(new starField(535 + offset, 600 + offset, index++));              // red/blue star
-            boardFields.Add(new normalField(535 + offset, 600 + offset + 65, index++));
-            for (int i = 0; i < 3; i++)
-                boardFields.Add(new normalField(535 + offset, 729 + offset + i * 65, index++));
-            boardFields.Add(new normalField(535 + offset, 923 + offset, index++));
-            boardFields.Add(new starField(535 + offset - 65, 923 + offset, index++));         // blue star
+                boardFields.Add(new normalField(409 + offset, 508 + offset + i * 50, index++));
+            boardFields.Add(new globeField(409 + offset, 607 + offset, index++));
+            for (int i = 0; i < 2; i++)
+                boardFields.Add(new normalField(409 + offset, 657 + offset + i * 50, index++));
+            boardFields.Add(new starField(360 + offset, 706 + offset, index++));         // blue star
         }
 
         private void SetupAllHomeFields()
@@ -144,7 +143,7 @@ namespace GameBoard
             }
             else
             {
-                if (boardFields[p.placement.index + moves] is starField)
+                if (boardFields[p.placement.index + moves] is starField && boardFields[p.placement.index + moves] is globeField != true)
                     p.newField(boardFields[nextStar(p)]);
                 else
                     p.newField(boardFields[p.placement.index + moves]);
@@ -154,6 +153,9 @@ namespace GameBoard
         private int nextStar(Piece p)
         {
             int index = p.placement.index + 2;
+
+            if (index == boardFields.Count)
+                return 0;
 
             while (boardFields[index] is starField != true)
                 index++;

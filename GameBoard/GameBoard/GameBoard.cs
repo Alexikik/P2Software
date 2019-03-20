@@ -19,6 +19,7 @@ namespace GameBoard
         public List<pathField> pathPlayerYellow = new List<pathField>();
         public List<Player> players;
         PictureBox gameBoard;
+        ControlPanel ControlPanel;
 
         public GameBoard(List<Player> players)
         {
@@ -29,6 +30,7 @@ namespace GameBoard
             SetupFields();
             SetupAllHomeFields();
             //SetupAllPathFields();
+            ControlPanel = new ControlPanel(new Point(766, 0));
 
             // Ludo image
             gameBoard = new PictureBox();
@@ -36,7 +38,7 @@ namespace GameBoard
             gameBoard.Image = Image.FromFile("Images/LudoPlade.png");
             gameBoard.Size = new Size(765, 765);
 
-
+            /*
             // Move one field forward button
             Button btn = new Button();
             btn.Size = new Size(60, 30);
@@ -48,6 +50,7 @@ namespace GameBoard
             btnBack.Size = new Size(60, 30);
             btnBack.Location = new Point(900, 200);
             btnBack.Text = "Back";
+            
 
             // Add one red piece
             //redPieces.Add(new Piece(2, boardFields[1]));
@@ -60,6 +63,7 @@ namespace GameBoard
             // Events
             btn.Click += btn_Click;
             btnBack.Click += btnBack_Click;
+            */
         }
 
 
@@ -83,8 +87,16 @@ namespace GameBoard
                     Controls.Add(players[i].pieces[j].piece);
                 }
             }
-            
+
+            /*
+            Controls.Add(ControlPanel.dicebtn);
+            Controls.Add(ControlPanel.dice);
+            Controls.Add(ControlPanel.currentPlayer);    
+            */
+
+            Controls.Add(ControlPanel);
             Controls.Add(gameBoard);
+            
         }
 
 

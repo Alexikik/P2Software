@@ -113,13 +113,13 @@ namespace GameBoard
             boardFields.Add(new globeField(608 + offset, 310 + offset, index++));
             for (int i = 0; i < 2; i++)
                 boardFields.Add(new normalField(657 + offset + i * 50, 310 + offset, index++));         
-            boardFields.Add(new starField(706 + offset, 360 + offset, index++));         // red star
+            boardFields.Add(new starField(706 + offset, 360 + offset, index++));               // red star
             boardFields.Add(new normalField(706 + offset, 409 + offset, index++));
             boardFields.Add(new globeField(657 + offset, 409 + offset, index++));
             for (int i = 0; i < 3; i++)
                 boardFields.Add(new normalField(607 + offset - i * 50, 409 + offset, index++));
             boardFields.Add(new normalField(458 + offset, 409 + offset, index++));
-            boardFields.Add(new starField(409 + offset, 458 + offset, index++));              // red/blue star
+            boardFields.Add(new starField(409 + offset, 458 + offset, index++));                // red/blue star
             for (int i = 0; i < 2; i++)
                 boardFields.Add(new normalField(409 + offset, 508 + offset + i * 50, index++));
             boardFields.Add(new globeField(409 + offset, 607 + offset, index++));
@@ -127,7 +127,7 @@ namespace GameBoard
                 boardFields.Add(new normalField(409 + offset, 657 + offset + i * 50, index++));
             boardFields.Add(new starField   (360 + offset, 706 + offset, index++));         // blue star
             boardFields.Add(new normalField (310 + offset, 706 + offset, index++));
-            boardFields.Add(new globeField  (310 + offset, 656 + offset, index++));        // blue globe
+            boardFields.Add(new globeField  (310 + offset, 656 + offset, index++));         // blue globe
             boardFields.Add(new normalField (310 + offset, 607 + offset, index++));
             boardFields.Add(new normalField (310 + offset, 557 + offset, index++));
             boardFields.Add(new normalField (310 + offset, 508 + offset, index++));
@@ -184,7 +184,36 @@ namespace GameBoard
 
         private void SetupAllPathFields()
         {
-            throw new NotImplementedException();
+            int index = 0;
+            int offset = 10;
+
+            //Green
+            pathPlayerGreen.Add(new pathField(360 + offset, 63  + offset, index++));
+            pathPlayerGreen.Add(new pathField(360 + offset, 112 + offset, index++));
+            pathPlayerGreen.Add(new pathField(360 + offset, 162 + offset, index++));
+            pathPlayerGreen.Add(new pathField(360 + offset, 211 + offset, index++));
+            pathPlayerGreen.Add(new pathField(360 + offset, 261 + offset, index++));
+
+            //Red
+            pathPlayerGreen.Add(new pathField(656 + offset, 360 + offset, index++));
+            pathPlayerGreen.Add(new pathField(607 + offset, 360 + offset, index++));
+            pathPlayerGreen.Add(new pathField(557 + offset, 360 + offset, index++));
+            pathPlayerGreen.Add(new pathField(508 + offset, 360 + offset, index++));
+            pathPlayerGreen.Add(new pathField(459 + offset, 360 + offset, index++));
+
+            //Blue
+            pathPlayerGreen.Add(new pathField(360 + offset, 656 + offset, index++));
+            pathPlayerGreen.Add(new pathField(360 + offset, 607 + offset, index++));
+            pathPlayerGreen.Add(new pathField(360 + offset, 557 + offset, index++));
+            pathPlayerGreen.Add(new pathField(360 + offset, 508 + offset, index++));
+            pathPlayerGreen.Add(new pathField(360 + offset, 459 + offset, index++));
+
+            //Yellow
+            pathPlayerGreen.Add(new pathField(63 + offset,  360 + offset, index++));
+            pathPlayerGreen.Add(new pathField(112 + offset, 360 + offset, index++));
+            pathPlayerGreen.Add(new pathField(162 + offset, 360 + offset, index++));
+            pathPlayerGreen.Add(new pathField(211 + offset, 360 + offset, index++));
+            pathPlayerGreen.Add(new pathField(261 + offset, 360 + offset, index++));
         }
 
         public void movePiece(Piece p, int moves)

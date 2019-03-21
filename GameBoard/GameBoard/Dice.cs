@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameBoard
 {
-  class Dice
+  public class Dice
   {
     Random rnd = new Random();
 

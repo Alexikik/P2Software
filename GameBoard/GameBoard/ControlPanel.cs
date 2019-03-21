@@ -11,15 +11,10 @@ namespace GameBoard
     public class ControlPanel : UserControl
     {
         public Button dicebtn;
-
         public Button piecebtnOne, piecebtnTwo, piecebtnThree, piecebtnFour;
-
         public PictureBox dice;
-
         public PictureBox finishRed, finishBlue, finishGreen, finishYellow, finishSimon;
-
         public TextBox currentPlayer;
-
         public TextBox currentStatus;
 
 
@@ -45,7 +40,7 @@ namespace GameBoard
             currentPlayer.Location = new Point(dice.Location.X, dicebtn.Location.Y + dicebtn.Height + 20);
             currentPlayer.Enabled = false;
             currentPlayer.TextAlign = HorizontalAlignment.Center;
-            currentPlayer.Text = "Simon";
+            currentPlayer.Text = "Thomas Tog";
 
             piecebtnOne = new Button();
             piecebtnOne.Size = new Size(100, 100);

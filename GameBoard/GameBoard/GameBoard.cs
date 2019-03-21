@@ -113,7 +113,34 @@ namespace GameBoard
             boardFields.Add(new globeField(409 + offset, 607 + offset, index++));
             for (int i = 0; i < 2; i++)
                 boardFields.Add(new normalField(409 + offset, 657 + offset + i * 50, index++));
-            boardFields.Add(new starField(360 + offset, 706 + offset, index++));         // blue star
+            boardFields.Add(new starField   (360 + offset, 706 + offset, index++));         // blue star
+            boardFields.Add(new normalField (310 + offset, 706 + offset, index++));
+            boardFields.Add(new globeField  (310 + offset, 656 + offset, index++));        // blue globe
+            boardFields.Add(new normalField (310 + offset, 607 + offset, index++));
+            boardFields.Add(new normalField (310 + offset, 557 + offset, index++));
+            boardFields.Add(new normalField (310 + offset, 508 + offset, index++));
+            boardFields.Add(new normalField (310 + offset, 457 + offset, index++));
+            boardFields.Add(new starField   (261 + offset, 409 + offset, index++));         //blue/yellow star
+            boardFields.Add(new normalField (211 + offset, 409 + offset, index++));
+            boardFields.Add(new normalField (162 + offset, 409 + offset, index++));
+            boardFields.Add(new globeField  (112 + offset, 409 + offset, index++));         //blue/yellow globe
+            boardFields.Add(new normalField (63  + offset, 409 + offset, index++));
+            boardFields.Add(new normalField (13  + offset, 409 + offset, index++));
+            boardFields.Add(new starField   (13  + offset, 360 + offset, index++));
+            boardFields.Add(new normalField (13  + offset, 310 + offset, index++));
+            boardFields.Add(new globeField  (63  + offset, 310 + offset, index++));         //yellow globe
+            boardFields.Add(new normalField (112 + offset, 310 + offset, index++));
+            boardFields.Add(new normalField (162 + offset, 310 + offset, index++));
+            boardFields.Add(new normalField (211 + offset, 310 + offset, index++));
+            boardFields.Add(new normalField (261 + offset, 310 + offset, index++));
+            boardFields.Add(new starField   (310 + offset, 261 + offset, index++));         //yellow/green star
+            boardFields.Add(new normalField (310 + offset, 211 + offset, index++));
+            boardFields.Add(new normalField (310 + offset, 162 + offset, index++));
+            boardFields.Add(new globeField  (310 + offset, 112 + offset, index++));         //yellow/green globe
+            boardFields.Add(new normalField (310 + offset, 63  + offset, index++));
+            boardFields.Add(new normalField (310 + offset, 13  + offset, index++));
+            boardFields.Add(new starField   (360 + offset, 13  + offset, index++));         //green star
+            //boardFields.Add(new normalField (409 + offset, 13  + offset, index++));
         }
 
         private void SetupAllHomeFields()

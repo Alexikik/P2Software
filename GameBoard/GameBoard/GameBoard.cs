@@ -172,14 +172,14 @@ namespace GameBoard
                 allHomeFields.Add(new homeField(608 + offset + i * 49, 469+49 + offset, index++));
             // Blue
             for (int i = 0; i < 2; i++)
-                allHomeFields.Add(new homeField(263 + offset + i * 49, 600 + offset, index++));
+                allHomeFields.Add(new homeField(201 + offset + i * 49, 607 + offset, index++));
             for (int i = 0; i < 2; i++)
-                allHomeFields.Add(new homeField(263 + offset + i * 49, 650 + offset, index++));
+                allHomeFields.Add(new homeField(201 + offset + i * 49, 656 + offset, index++));
             // Yellow
             for (int i = 0; i < 2; i++)
-                allHomeFields.Add(new homeField(82 + offset + i * 49, 262 + offset, index++));
+                allHomeFields.Add(new homeField(63 + offset + i * 49, 200 + offset, index++));
             for (int i = 0; i < 2; i++)
-                allHomeFields.Add(new homeField(82 + offset + i * 49, 327 + offset, index++));
+                allHomeFields.Add(new homeField(63 + offset + i * 49, 250 + offset, index++));
         }
 
         private void SetupAllPathFields()

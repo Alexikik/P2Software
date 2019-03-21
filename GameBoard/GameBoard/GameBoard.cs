@@ -19,7 +19,7 @@ namespace GameBoard
         public List<pathField> pathPlayerYellow = new List<pathField>();
         public List<Player> players;
         PictureBox gameBoard;
-        ControlPanel ControlPanel;
+        public ControlPanel ControlPanel;
 
         public GameBoard(List<Player> players)
         {

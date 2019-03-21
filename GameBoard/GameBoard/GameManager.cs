@@ -11,13 +11,17 @@ namespace GameBoard
     {
         public List<Player> players = new List<Player>();
         public GameBoard Ludo;
+        public Player currentPlayer;
+        public int diceValue;
 
         public GameManager()
         {
             setupGame();
         }
 
-        public void setupGame()
+
+
+        private void setupGame()
         {
             Ludo = new GameBoard(players);
 
@@ -28,8 +32,46 @@ namespace GameBoard
 
             Ludo.SetupControls();
 
+            currentPlayer = chooseStartingPlayer();
+            playGame();
+
             Application.EnableVisualStyles();
             Application.Run(Ludo);
+        }
+
+        private Player chooseStartingPlayer()
+        {
+            Random seed = new Random();
+
+            int randValue = seed.Next(4);
+
+            return players[randValue];
+        }
+
+        public void playGame()
+        {
+            Ludo.ControlPanel.currentPlayer.Text = currentPlayerString(currentPlayer);
+        }
+
+        private string currentPlayerString(Player player)
+        {
+            switch (player.team)
+            {
+                case 1:
+                    return "Green";
+                    break;
+                case 2:
+                    return "Red";
+                    break;
+                case 3:
+                    return "Blue";
+                    break;
+                case 4:
+                    return "Yellow";
+                    break;
+                default:
+                    return "Error";
+            }
         }
     }
 }

@@ -241,3 +241,17 @@ GameBoard/GameBoard/obj/Debug/GameBoard.exe
 GameBoard/GameBoard/obj/Debug/GameBoard.csproj.CoreCompileInputs.cache
 GameBoard/GameBoard/bin/Debug/GameBoard.pdb
 GameBoard/GameBoard/bin/Debug/GameBoard.exe
+*.exe
+*.pdb
+*.exe
+*.pdb
+GameBoard/GameBoard/obj/Debug/GameBoard.pdb
+GameBoard/GameBoard/obj/Debug/GameBoard.exe
+GameBoard/GameBoard/bin/Debug/GameBoard.pdb
+GameBoard/GameBoard/bin/Debug/GameBoard.exe
+*.pdb
+*.exe
+GameBoard/GameBoard/bin/Debug/GameBoard.exe
+GameBoard/GameBoard/bin/Debug/GameBoard.pdb
+GameBoard/GameBoard/obj/Debug/GameBoard.pdb
+GameBoard/GameBoard/obj/Debug/GameBoard.exe

@@ -16,13 +16,14 @@ namespace GameBoard
         public PictureBox finishRed, finishBlue, finishGreen, finishYellow, finishSimon;
         public TextBox currentPlayer;
         public TextBox currentStatus;
+        public GameManager gameManager;
 
-
-        public ControlPanel(Point coordinates)
+        public ControlPanel(Point coordinates, GameManager gameManagerX)
         {
-            this.Width = 300;
+            this.Width = 240;
             this.Height = 765;
             this.Location = coordinates;
+            this.gameManager = gameManagerX;
 
             dice = new PictureBox();
             dice.Image = Image.FromFile("Images/Red.png");
@@ -109,13 +110,17 @@ namespace GameBoard
             piecebtnTwo.Click += PiecebtnTwo_Click;
             piecebtnThree.Click += PiecebtnThree_Click;
             piecebtnFour.Click += PiecebtnFour_Click;
-            
-
+            dicebtn.Click += Dicebtn_Click;
         }
 
-        private void PiecebtnThree_Click(object sender, EventArgs e)
+        private void Dicebtn_Click(object sender, EventArgs e)
         {
-            currentPlayer.Text = this.ActiveControl.Text;
+            gameManager.rollDice();
+        }
+
+        private void PiecebtnOne_Click(object sender, EventArgs e)
+        {
+            gameManager.turnEnd();
         }
 
         private void PiecebtnTwo_Click(object sender, EventArgs e)
@@ -123,7 +128,7 @@ namespace GameBoard
             currentPlayer.Text = this.ActiveControl.Text;
         }
 
-        private void PiecebtnOne_Click(object sender, EventArgs e)
+        private void PiecebtnThree_Click(object sender, EventArgs e)
         {
             currentPlayer.Text = this.ActiveControl.Text;
         }

@@ -18,19 +18,21 @@ namespace GameBoard
         public List<pathField> pathPlayerBlue = new List<pathField>();
         public List<pathField> pathPlayerYellow = new List<pathField>();
         public List<Player> players;
+        GameManager gameManager;
         PictureBox gameBoard;
-        ControlPanel ControlPanel;
+        public ControlPanel ControlPanel;
 
-        public GameBoard(List<Player> players)
+        public GameBoard(List<Player> players, GameManager gameManagerX)
         {
             // Setup
             this.Height = 804;
-            this.Width = 1204;
+            this.Width = 1020;
             this.players = players;
+            this.gameManager = gameManagerX;
             SetupFields();
             SetupAllHomeFields();
             //SetupAllPathFields();
-            ControlPanel = new ControlPanel(new Point(766, 0));
+            ControlPanel = new ControlPanel(new Point(766, 0), gameManager);
 
             // Ludo image
             gameBoard = new PictureBox();

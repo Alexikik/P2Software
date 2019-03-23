@@ -10,7 +10,7 @@ namespace GameBoard
     {
         public int x;
         public int y;
-        public int team;
+        public int team;    // 1:green, 2:red, 3:blue, 4:yellow
         public int amountOfPieces;
         public Piece p1, p2, p3, p4;
         public int index;

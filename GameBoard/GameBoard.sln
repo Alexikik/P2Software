@@ -36,6 +36,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pieces", "Pieces", "{2827B9
 		GameBoard\bin\Debug\Images\yellow4.png = GameBoard\bin\Debug\Images\yellow4.png
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dice", "Dice", "{73D27780-6DB3-4296-A67D-EA12E8AE7E0A}"
+	ProjectSection(SolutionItems) = preProject
+		GameBoard\bin\Debug\Images\Dice\Dice1.png = GameBoard\bin\Debug\Images\Dice\Dice1.png
+		GameBoard\bin\Debug\Images\Dice\Dice2.png = GameBoard\bin\Debug\Images\Dice\Dice2.png
+		GameBoard\bin\Debug\Images\Dice\Dice3.png = GameBoard\bin\Debug\Images\Dice\Dice3.png
+		GameBoard\bin\Debug\Images\Dice\Dice4.png = GameBoard\bin\Debug\Images\Dice\Dice4.png
+		GameBoard\bin\Debug\Images\Dice\Dice5.png = GameBoard\bin\Debug\Images\Dice\Dice5.png
+		GameBoard\bin\Debug\Images\Dice\Dice6.png = GameBoard\bin\Debug\Images\Dice\Dice6.png
+		GameBoard\bin\Debug\Images\Dice\DiceBlank.png = GameBoard\bin\Debug\Images\Dice\DiceBlank.png
+		GameBoard\bin\Debug\Images\Dice\DiceStarU.png = GameBoard\bin\Debug\Images\Dice\DiceStarU.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +64,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2827B96E-1F93-450F-8497-547C755785BE} = {EEC770BF-699F-43EA-B4AD-1A653EC0DB04}
+		{73D27780-6DB3-4296-A67D-EA12E8AE7E0A} = {EEC770BF-699F-43EA-B4AD-1A653EC0DB04}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F4CB9A44-8B94-439D-A3B9-DBC5D27ED46D}

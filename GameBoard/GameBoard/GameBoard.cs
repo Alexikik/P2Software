@@ -39,33 +39,6 @@ namespace GameBoard
             gameBoard.SizeMode = PictureBoxSizeMode.StretchImage;    // Streches the image
             gameBoard.Image = Image.FromFile("Images/LudoPlade.png");
             gameBoard.Size = new Size(765, 765);
-
-            /*
-            // Move one field forward button
-            Button btn = new Button();
-            btn.Size = new Size(60, 30);
-            btn.Location = new Point(1000, 200);
-            btn.Text = "Next";
-
-            // Move one field back button
-            Button btnBack = new Button();
-            btnBack.Size = new Size(60, 30);
-            btnBack.Location = new Point(900, 200);
-            btnBack.Text = "Back";
-            
-
-            // Add one red piece
-            //redPieces.Add(new Piece(2, boardFields[1]));
-            //redPieces.Add(new Piece(2, allHomeFields[6]));
-
-            // Controls
-            Controls.Add(btn);
-            Controls.Add(btnBack);
-
-            // Events
-            btn.Click += btn_Click;
-            btnBack.Click += btnBack_Click;
-            */
         }
 
 
@@ -81,7 +54,6 @@ namespace GameBoard
 
         public void SetupControls()
         {
-            //Controls.Add(redPieces[0].piece);
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
@@ -90,15 +62,8 @@ namespace GameBoard
                 }
             }
 
-            /*
-            Controls.Add(ControlPanel.dicebtn);
-            Controls.Add(ControlPanel.dice);
-            Controls.Add(ControlPanel.currentPlayer);    
-            */
-
             Controls.Add(ControlPanel);
             Controls.Add(gameBoard);
-            
         }
 
 
@@ -107,8 +72,10 @@ namespace GameBoard
             int index = 0;
             int offset = 10;
 
-            for (int i = 0; i < 6; i++) // Insert globefield
-                boardFields.Add(new normalField(409 + offset, 13 + offset + i * 50, index++));
+            boardFields.Add(new normalField(409 + offset, 13 + offset, index++));
+            boardFields.Add(new globeField(409 + offset, 63 + offset, index++));            // green globe
+            for (int i = 0; i < 4; i++) 
+                boardFields.Add(new normalField(409 + offset, 113 + offset + i * 50, index++));
             boardFields.Add(new starField(458 + offset, 310 + offset, index++));                // green/red star
             boardFields.Add(new normalField(508 + offset, 310 + offset, index++));
             boardFields.Add(new normalField(558 + offset, 310 + offset, index++));
@@ -154,7 +121,6 @@ namespace GameBoard
             boardFields.Add(new normalField (310 + offset, 63  + offset, index++));
             boardFields.Add(new normalField (310 + offset, 13  + offset, index++));
             boardFields.Add(new starField   (360 + offset, 13  + offset, index++));         //green star
-            //boardFields.Add(new normalField (409 + offset, 13  + offset, index++));
         }
 
         private void SetupAllHomeFields()
@@ -220,32 +186,188 @@ namespace GameBoard
 
         public void movePiece(Piece p, int moves)
         {
-            if (p.placement.index + moves == boardFields.Count) // Starts back from the start
+            switch (moves)
             {
-                p.newField(boardFields[0]);
+                case 1:
+                case 2:
+                case 4:
+                    moveXfields(p, moves);
+                    break;
+                case 3:
+                    moveToNextStar(p, 0);
+                    break;
+                case 5:
+                    moveToNextGlobus(p);
+                    break;
+                case 6:
+                    if (p.placement is homeField)
+                        moveToNextGlobus(p);
+                    else
+                        moveXfields(p, moves);
+                    break;
+            }
+        }
+
+        private int checkIfHomefield(Piece p)
+        {
+            if (p.placement is homeField)
+                switch (p.player.team)
+                {
+                    case 1:
+                        return 1;
+                    case 2:
+                        return 14;
+                    case 3:
+                        return 27;
+                    case 4:
+                        return 40;
+                    default:
+                        return 0;
+                }
+            else
+            {
+                return 0;
+            }
+        }
+
+        private void moveXfields(Piece p, int moves)
+        {
+            if (p.placement.index + moves >= boardFields.Count) // Starts back from the start
+            {
+                int remainingMoves = moves - (boardFields.Count - p.placement.index);
+                returnOtherPlayerHome(p, boardFields[0 + remainingMoves]);
+            }
+            else   
+            {
+                if (boardFields[p.placement.index + moves] is starField)   // Check if it's a starfield
+                    moveToNextStar(p, moves);
+                else
+                    returnOtherPlayerHome(p, boardFields[p.placement.index + moves]);
+            }
+        }
+
+        private void moveToNextGlobus(Piece p)
+        {
+            int ifHomefield = checkIfHomefield(p);
+
+            if (ifHomefield != 0)
+            {
+                returnOtherPlayerHome(p, boardFields[ifHomefield]);
             }
             else
             {
-                if (boardFields[p.placement.index + moves] is starField && boardFields[p.placement.index + moves] is globeField != true)
-                    p.newField(boardFields[nextStar(p)]);
-                else
-                    p.newField(boardFields[p.placement.index + moves]);
+                returnOtherPlayerHome(p, boardFields[findNextGlobus(p)]);
             }
         }
-
-        private int nextStar(Piece p)
+        private int findNextGlobus(Piece p)
         {
-            int index = p.placement.index + 2;
+            int index = p.placement.index + 1;
+            bool notFound = true;
 
-            if (index == boardFields.Count)
-                return 0;
-
-            while (boardFields[index] is starField != true)
-                index++;
-
+            while (notFound)
+            {
+                if (index >= boardFields.Count)
+                    index = 0;
+                else
+                {
+                    if (boardFields[index] is globeField)
+                        return index;
+                    index++;
+                }
+            }
             return index;
+
         }
 
+        private void moveToNextStar(Piece p, int moves)
+        {
+            int index = p.placement.index + moves + 1;      // +1 so the piece jumps to the next star
+            bool notFound = true;
+
+            while (notFound)
+            {
+                if (index >= boardFields.Count)
+                    index = 0;
+                else
+                {
+                    if (boardFields[index] is starField)
+                        notFound = false;
+                    else
+                        index++;
+                }    
+            }
+            returnOtherPlayerHome(p, boardFields[index]);
+        }
+        
+        private void returnOtherPlayerHome(Piece p, allFields newPlacement)
+        {
+            List<Piece> piecesAtField = new List<Piece>();
+
+            // Adds all pieces at newPlacement to piecesAtField list
+            foreach (Player player in players)  
+            {
+                foreach (Piece piece in player.pieces)
+                {
+                    if (piece.placement == newPlacement)
+                    {
+                        piecesAtField.Add(piece);
+                    }
+                }
+            }
+
+            // Reacts to how many pieces is in piecesAtField list
+            if (piecesAtField.Count == 0)
+                p.newField(newPlacement);
+            else if (piecesAtField.Count == 1)      // Move piece in list back to home
+            {
+                movePieceHome(piecesAtField[0]);    // Moves other player home
+                p.newField(newPlacement);           // Moves current player to field
+            }
+            else
+            { }    // Move p back to home
+        }
+
+        private void movePieceHome(Piece p)
+        {
+            List<allFields> occupiedFields = new List<allFields>();
+            int fieldIndex;
+            bool notFound = true;
+
+            foreach (Piece piece in p.player.pieces)
+            {
+                if (piece.placement is homeField)
+                    occupiedFields.Add(piece.placement);
+            }
+
+            switch (p.player.team)  // Sets start fieldIndex for the player
+            {
+                case 1:
+                    fieldIndex = 0;
+                    break;
+                case 2:
+                    fieldIndex = 4;
+                    break;
+                case 3:
+                    fieldIndex = 8;
+                    break;
+                case 4:
+                    fieldIndex = 12;
+                    break;
+                default:
+                    fieldIndex = 99;
+                    break;
+            }
+
+            while (notFound)
+            {
+                if (occupiedFields.Contains(allHomeFields[fieldIndex]) == false)
+                    notFound = false;
+                else
+                    fieldIndex++;
+            }
+
+            p.newField(allHomeFields[fieldIndex]);
+        }
     }
 }
 

@@ -26,7 +26,8 @@ namespace GameBoard
             this.gameManager = gameManagerX;
 
             dice = new PictureBox();
-            dice.Image = Image.FromFile("Images/Red.png");
+            dice.SizeMode = PictureBoxSizeMode.StretchImage;
+            dice.Image = Image.FromFile("Images/Dice/DiceBlank.png");
             dice.Size = new Size(120, 120);
             dice.Location = new Point(20, 20);
 
@@ -120,22 +121,22 @@ namespace GameBoard
 
         private void PiecebtnOne_Click(object sender, EventArgs e)
         {
-            gameManager.turnEnd();
+            gameManager.turnEnd(1);
         }
 
         private void PiecebtnTwo_Click(object sender, EventArgs e)
         {
-            currentPlayer.Text = this.ActiveControl.Text;
+            gameManager.turnEnd(2);
         }
 
         private void PiecebtnThree_Click(object sender, EventArgs e)
         {
-            currentPlayer.Text = this.ActiveControl.Text;
+            gameManager.turnEnd(3);
         }
 
         private void PiecebtnFour_Click(object sender, EventArgs e)
         {
-            currentPlayer.Text = this.ActiveControl.Text;
+            gameManager.turnEnd(4);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace GameBoard
 
 
             for (int i = 0; i < 4; i++)
-                pieces.Add(new Piece(team, i, gameBoard.allHomeFields[pieceIndex++]));
+                pieces.Add(new Piece(this, i, gameBoard.allHomeFields[pieceIndex++]));
             
         }
     }

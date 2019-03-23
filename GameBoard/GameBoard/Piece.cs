@@ -10,17 +10,17 @@ namespace GameBoard
 {
     public class Piece
     {
-        public int player;  // 1:green, 2:red, 3:blue, 4:yellow
+        public Player player;  // 1:green, 2:red, 3:blue, 4:yellow
         public allFields placement;
 
         public PictureBox piece;
 
-        public Piece(int p, int nr, allFields f)
+        public Piece(Player player, int num, allFields placement)
         {
-            player = p;
-            placement = f;
+            this.player = player;
+            this.placement = placement;
 
-            piece = MakePiece(f, nr);
+            piece = MakePiece(placement, num);
         }
 
 
@@ -43,20 +43,16 @@ namespace GameBoard
 
         private string playerString()
         {
-            switch (player)
+            switch (player.team)
             {
                 case 1:
                     return "green";
-                    break;
                 case 2:
                     return "red";
-                    break;
                 case 3:
                     return "blue";
-                    break;
                 case 4:
                     return "yellow";
-                    break;
                 default:
                     return "error";
             }

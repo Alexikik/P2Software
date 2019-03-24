@@ -17,6 +17,7 @@ namespace GameBoard
         public TextBox currentPlayer;
         public TextBox currentStatus;
         public GameManager gameManager;
+        public Label turnCount;
 
         public ControlPanel(Point coordinates, GameManager gameManagerX)
         {
@@ -73,24 +74,34 @@ namespace GameBoard
             currentStatus.Text = "Finished";
 
             finishRed = new PictureBox();
-            finishRed.Image = Image.FromFile("Images/Red.png");
+            finishRed.SizeMode = PictureBoxSizeMode.StretchImage;
+            finishRed.Image = Image.FromFile("Images/Pieces/red1.png");
             finishRed.Size = new Size(100, 100);
             finishRed.Location = new Point(dice.Location.X, currentStatus.Location.Y + currentStatus.Height + 20);
 
             finishBlue = new PictureBox();
-            finishBlue.Image = Image.FromFile("Images/Red.png");
+            finishBlue.SizeMode = PictureBoxSizeMode.StretchImage;
+            finishBlue.Image = Image.FromFile("Images/Pieces/blue1.png");
             finishBlue.Size = new Size(100, 100);
             finishBlue.Location = new Point(dice.Location.X + finishRed.Width + 5, currentStatus.Location.Y + currentStatus.Height + 20);
 
             finishGreen = new PictureBox();
-            finishGreen.Image = Image.FromFile("Images/Red.png");
+            finishGreen.SizeMode = PictureBoxSizeMode.StretchImage;
+            finishGreen.Image = Image.FromFile("Images/Pieces/green1.png");
             finishGreen.Size = new Size(100, 100);
             finishGreen.Location = new Point(dice.Location.X, finishRed.Location.Y + finishRed.Height + 5);
 
             finishYellow = new PictureBox();
-            finishYellow.Image = Image.FromFile("Images/Red.png");
+            finishYellow.SizeMode = PictureBoxSizeMode.StretchImage;
+            finishYellow.Image = Image.FromFile("Images/Pieces/yellow1.png");
             finishYellow.Size = new Size(100, 100);
             finishYellow.Location = new Point(dice.Location.X + finishRed.Width + 5, finishRed.Location.Y + finishRed.Height + 5);
+
+            turnCount = new Label();
+            turnCount.Size = new Size(200, 100);
+            turnCount.Font = new Font("Arial", 25);
+            turnCount.Text = $"Turn: {gameManager.turnCount}";
+            turnCount.Location = new Point(dice.Location.X, finishGreen.Location.Y + finishGreen.Height + 5);
 
             Controls.Add(dicebtn);
             Controls.Add(dice);
@@ -106,6 +117,8 @@ namespace GameBoard
             Controls.Add(finishBlue);
             Controls.Add(finishGreen);
             Controls.Add(finishYellow);
+
+            Controls.Add(turnCount);
 
             piecebtnOne.Click += PiecebtnOne_Click;
             piecebtnTwo.Click += PiecebtnTwo_Click;

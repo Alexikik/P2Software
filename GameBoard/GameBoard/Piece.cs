@@ -13,14 +13,14 @@ namespace GameBoard
         public Player player;  // 1:green, 2:red, 3:blue, 4:yellow
         public allFields placement;
 
-        public PictureBox piece;
+        public PictureBox picture;
 
         public Piece(Player player, int num, allFields placement)
         {
             this.player = player;
             this.placement = placement;
 
-            piece = MakePiece(placement, num);
+            picture = MakePiece(placement, num);
         }
 
 
@@ -38,7 +38,7 @@ namespace GameBoard
         public void newField(allFields newPlacement)
         {
             placement = newPlacement;
-            piece.Location = new Point(newPlacement.x, newPlacement.y);
+            picture.Location = new Point(newPlacement.x, newPlacement.y);
         }
 
         private string playerString()

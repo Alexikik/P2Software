@@ -17,6 +17,7 @@ namespace GameBoard
         public Dice dice;
         public int diceValue;
         public bool turnDone;
+        public int turnCount;
 
         public GameManager()
         {
@@ -29,6 +30,7 @@ namespace GameBoard
         {
             Ludo = new GameBoard(players, this);
             dice = new Dice();
+            turnCount = 1;
 
             for (int i = 0; i < 4; i++)
             {
@@ -44,6 +46,7 @@ namespace GameBoard
             Ludo.ControlPanel.piecebtnTwo.Enabled = false;
             Ludo.ControlPanel.piecebtnThree.Enabled = false;
             Ludo.ControlPanel.piecebtnFour.Enabled = false;
+            Ludo.ControlPanel.turnCount.Text = $"Turn: {turnCount}";
         }
 
         public void playGame()
@@ -97,6 +100,9 @@ namespace GameBoard
             Ludo.ControlPanel.piecebtnThree.Enabled = false;
             Ludo.ControlPanel.piecebtnFour.Enabled = false;
             Ludo.ControlPanel.dice.Image = Image.FromFile("Images/Dice/DiceBlank.png");
+
+            turnCount++;
+            Ludo.ControlPanel.turnCount.Text = $"Turn: {turnCount}";
         }
 
         public void rollDice()

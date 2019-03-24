@@ -10,7 +10,6 @@ namespace GameBoard
 {
     public class GameBoard : Form
     {
-        //public List<Piece> redPieces = new List<Piece>();
         public List<allFields> boardFields = new List<allFields>();
         public List<homeField> allHomeFields = new List<homeField>();
         public List<pathField> pathPlayerGreen = new List<pathField>();
@@ -40,17 +39,7 @@ namespace GameBoard
             gameBoard.Image = Image.FromFile("Images/LudoPlade.png");
             gameBoard.Size = new Size(765, 765);
         }
-
-
-        private void btn_Click(object sender, EventArgs e)
-        {
-            movePiece(players[0].pieces[0], 1);
-
-        }
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            movePiece(players[0].pieces[0], -1);
-        }
+        
 
         public void SetupControls()
         {
@@ -58,7 +47,7 @@ namespace GameBoard
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    Controls.Add(players[i].pieces[j].piece);
+                    Controls.Add(players[i].pieces[j].picture);
                 }
             }
 
@@ -301,32 +290,112 @@ namespace GameBoard
         
         private void returnOtherPlayerHome(Piece p, allFields newPlacement)
         {
-            List<Piece> piecesAtField = new List<Piece>();
-
-            // Adds all pieces at newPlacement to piecesAtField list
-            foreach (Player player in players)  
-            {
-                foreach (Piece piece in player.pieces)
-                {
-                    if (piece.placement == newPlacement)
-                    {
-                        piecesAtField.Add(piece);
-                    }
-                }
-            }
+            List<Piece> piecesAtField = findPiecesAtField(newPlacement);
 
             // Reacts to how many pieces is in piecesAtField list
-            if (piecesAtField.Count == 0)
-                p.newField(newPlacement);
-            else if (piecesAtField.Count == 1)      // Move piece in list back to home
+            switch (piecesAtField.Count)
             {
-                movePieceHome(piecesAtField[0]);    // Moves other player home
-                p.newField(newPlacement);           // Moves current player to field
-            }
-            else
-            { }    // Move p back to home
-        }
+                case 0:
+                    resetSizeBeforeMove(p, newPlacement);
+                    break;
+                case 1:
+                    if (piecesAtField[0].player == p.player)    // If the pieces are on the same team
+                    {
+                        resetSizeBeforeMove(p, newPlacement);
 
+                        // Sets size and location of piece already on piece
+                        piecesAtField[0].picture.Size = new Size(15, 15);
+                        piecesAtField[0].picture.Location = new Point(piecesAtField[0].picture.Location.X - 4, piecesAtField[0].picture.Location.Y + 5);
+
+                        // Sets size and location of new piece 
+                        p.picture.Size = new Size(15, 15);
+                        p.picture.Location = new Point(piecesAtField[0].picture.Location.X + 19, piecesAtField[0].picture.Location.Y);
+                    }
+                    else
+                    {
+                        movePieceHome(piecesAtField[0]);    // Moves other player home
+                        resetSizeBeforeMove(p, newPlacement);           // Moves current player to field
+                    }
+                    break;
+                case 2:     // Two pieces at the field
+                    if (piecesAtField[0].player == p.player)    // If the pieces are on the same team
+                    {
+                        int dx;
+                        Piece pLeft, pRight;
+
+                        resetSizeBeforeMove(p, newPlacement);
+
+                        // Find piece on the left
+                        dx = piecesAtField[0].picture.Location.X - piecesAtField[1].picture.Location.X;
+                        if (dx > 0)
+                        {
+                            pRight = piecesAtField[0];
+                            pLeft = piecesAtField[1];
+                        }
+                        else
+                        {
+                            pRight = piecesAtField[1];
+                            pLeft = piecesAtField[0];
+                        }
+
+                        // Relocate the two pieces already on the field
+                        pLeft.picture.Location = new Point(pLeft.picture.Location.X, pLeft.picture.Location.Y - 9);
+                        pRight.picture.Location = new Point(pRight.picture.Location.X, pRight.picture.Location.Y - 9);
+
+                        // Sets size and location for new piece at field
+                        p.picture.Size = new Size(15, 15);
+                        p.picture.Location = new Point(pLeft.picture.Location.X + 9, pLeft.picture.Location.Y + 19);
+                    }
+                    else  // If not on the same team
+                        movePieceHome(p);   // Moves current player home
+                    break;
+                case 3:     // Three pieces at the field
+                    if (piecesAtField[0].player == p.player)    // If the pieces are on the same team
+                    {
+                        int dy;
+                        Piece pLeft, pRight, pBottomL;
+
+                        resetSizeBeforeMove(p, newPlacement);
+
+                        // Find piece on the bottom, left and right
+                        dy = piecesAtField[0].picture.Location.Y - piecesAtField[1].picture.Location.Y;
+                        if (dy > 0)
+                        {
+                            pBottomL = piecesAtField[0];
+                            piecesAtField.Remove(pBottomL);
+                            pLeft = piecesAtField[findPieceOnLeft(piecesAtField)];
+                            piecesAtField.Remove(pLeft);
+                            pRight = piecesAtField[0];
+                        }
+                        else if (dy < 0)
+                        {
+                            pBottomL = piecesAtField[1];
+                            piecesAtField.Remove(pBottomL);
+                            pLeft = piecesAtField[findPieceOnLeft(piecesAtField)];
+                            piecesAtField.Remove(pLeft);
+                            pRight = piecesAtField[0];
+                        }
+                        else   // If the two piece[0] and piece[1] have the same y, then piece[2] is the bottom one
+                        {
+                            pBottomL = piecesAtField[2];
+                            piecesAtField.Remove(pBottomL);
+                            pLeft = piecesAtField[findPieceOnLeft(piecesAtField)];
+                            piecesAtField.Remove(pLeft);
+                            pRight = piecesAtField[0];
+                        }
+
+                        // Relocate the bottom piece
+                        pBottomL.picture.Location = new Point(pLeft.picture.Location.X, pBottomL.picture.Location.Y);
+
+                        // Sets size and location for new piece at field
+                        p.picture.Size = new Size(15, 15);
+                        p.picture.Location = new Point(pLeft.picture.Location.X + 19, pBottomL.picture.Location.Y);
+                    }
+                    else  // If not on the same team
+                        movePieceHome(p);   // Moves current player home
+                    break;
+            }
+        }
         private void movePieceHome(Piece p)
         {
             List<allFields> occupiedFields = new List<allFields>();
@@ -366,7 +435,70 @@ namespace GameBoard
                     fieldIndex++;
             }
 
-            p.newField(allHomeFields[fieldIndex]);
+            resetSizeBeforeMove(p, allHomeFields[fieldIndex]);
+        }
+
+        private void resetSizeBeforeMove(Piece p, allFields newPlacement)
+        {
+            List<Piece> piecesAtField = findPiecesAtField(p.placement);
+
+            // Removes itself from the list
+            int index = piecesAtField.IndexOf(p);
+            piecesAtField.Remove(p);
+
+            // Updates size and location of pieces at old field
+            switch (piecesAtField.Count)    
+            {
+                case 1:
+                    piecesAtField[0].picture.Size = new Size(26, 26);
+                    piecesAtField[0].picture.Location = new Point(piecesAtField[0].placement.x, piecesAtField[0].placement.y);
+                    break;
+                case 2:     // Set size acording to two pieces at field
+                    piecesAtField[0].picture.Location = new Point(piecesAtField[0].placement.x - 4, piecesAtField[0].placement.y + 5);
+                    piecesAtField[1].picture.Location = new Point(piecesAtField[0].picture.Location.X + 19, piecesAtField[0].picture.Location.Y);
+                    break;
+                case 3:     // Set size acording to three pieces at field
+                    piecesAtField[0].picture.Location = new Point(piecesAtField[0].placement.x - 4, piecesAtField[0].placement.y + 5 - 9);
+                    piecesAtField[1].picture.Location = new Point(piecesAtField[0].picture.Location.X + 19, piecesAtField[0].picture.Location.Y);
+                    piecesAtField[2].picture.Location = new Point(piecesAtField[0].picture.Location.X + 9, piecesAtField[0].picture.Location.Y + 19);
+                    break;
+                default:
+                    break;
+            }
+
+            // Resets size and moves it
+            p.picture.Size = new Size(26, 26);    // This resets the size, eg if it came from a field with more pieces on it
+            p.newField(newPlacement);
+        }
+
+        private List<Piece> findPiecesAtField(allFields field)
+        {
+            List<Piece> piecesAtField = new List<Piece>();
+
+            // Adds all pieces at newPlacement to piecesAtField list
+            foreach (Player player in players)
+            {
+                foreach (Piece piece in player.pieces)
+                {
+                    if (piece.placement == field)
+                        piecesAtField.Add(piece);
+                }
+            }
+
+            return piecesAtField;
+        }
+
+        private int findPieceOnLeft(List<Piece> pieces) // Returns index of left piece
+        {
+            int dx;
+            Piece pLeft, pRight;
+
+            // Find piece on the left
+            dx = pieces[0].picture.Location.X - pieces[1].picture.Location.X;
+            if (dx > 0)
+                return 1;
+            else
+                return 0;
         }
     }
 }

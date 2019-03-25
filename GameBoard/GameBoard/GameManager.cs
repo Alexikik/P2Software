@@ -14,6 +14,7 @@ namespace GameBoard
         public GameBoard Ludo;
         public Player currentPlayer;
         public int diceRollsForCurrentPlayer;
+        public bool currentPlayerExtraTurn;
         public Dice dice;
         public int diceValue;
         public bool turnDone;
@@ -31,6 +32,8 @@ namespace GameBoard
             Ludo = new GameBoard(players, this);
             dice = new Dice();
             turnCount = 1;
+            diceRollsForCurrentPlayer = 0;
+            currentPlayerExtraTurn = false;
 
             for (int i = 0; i < 4; i++)
             {
@@ -40,7 +43,6 @@ namespace GameBoard
             Ludo.SetupControls();
 
             currentPlayer = chooseStartingPlayer();
-            Ludo.ControlPanel.currentPlaytxt.Text = currentPlayerString(currentPlayer);
 
             Ludo.ControlPanel.piecebtnOne.Enabled = false;
             Ludo.ControlPanel.piecebtnTwo.Enabled = false;
@@ -52,6 +54,7 @@ namespace GameBoard
         public void playGame()
         {
             Application.EnableVisualStyles();
+            Ludo.ControlPanel.currentPlaytxt.Text = currentPlayerString(currentPlayer);
             Application.Run(Ludo);
         }
 
@@ -90,23 +93,37 @@ namespace GameBoard
             if (pieceNum != 99)     // pieceNum is 99 if no pieces can move
                 Ludo.movePiece(currentPlayer.pieces[pieceNum - 1], diceValue);
 
-            // Gives the turn to the next player
-            if (currentPlayer.team == 4)    // If it's player four, then start with player one
-                currentPlayer = players[0];
-            else
-                currentPlayer = players[currentPlayer.team];
-            diceRollsForCurrentPlayer = 0;
+            if (currentPlayerExtraTurn) // If the player has an extra turn
+            {
+                currentPlayerExtraTurn = false;
 
-            Ludo.ControlPanel.currentPlaytxt.Text = currentPlayerString(currentPlayer);
-            Ludo.ControlPanel.dicebtn.Enabled = true;
-            Ludo.ControlPanel.piecebtnOne.Enabled = false;
-            Ludo.ControlPanel.piecebtnTwo.Enabled = false;
-            Ludo.ControlPanel.piecebtnThree.Enabled = false;
-            Ludo.ControlPanel.piecebtnFour.Enabled = false;
-            Ludo.ControlPanel.dice.Image = Image.FromFile("Images/Dice/DiceBlank.png");
+                Ludo.ControlPanel.dicebtn.Enabled = true;
+                Ludo.ControlPanel.piecebtnOne.Enabled = false;
+                Ludo.ControlPanel.piecebtnTwo.Enabled = false;
+                Ludo.ControlPanel.piecebtnThree.Enabled = false;
+                Ludo.ControlPanel.piecebtnFour.Enabled = false;
+            }
+            else    // If the player doesn't have an extra turn
+            {
+                // Gives the turn to the next player
+                if (currentPlayer.team == 4)    // If it's player four, then start with player one
+                    currentPlayer = players[0];
+                else
+                    currentPlayer = players[currentPlayer.team];
+                diceRollsForCurrentPlayer = 0;
+                currentPlayerExtraTurn = false;
 
-            turnCount++;
-            Ludo.ControlPanel.turnCount.Text = $"Turn: {turnCount}";
+                Ludo.ControlPanel.currentPlaytxt.Text = currentPlayerString(currentPlayer);
+                Ludo.ControlPanel.dicebtn.Enabled = true;
+                Ludo.ControlPanel.piecebtnOne.Enabled = false;
+                Ludo.ControlPanel.piecebtnTwo.Enabled = false;
+                Ludo.ControlPanel.piecebtnThree.Enabled = false;
+                Ludo.ControlPanel.piecebtnFour.Enabled = false;
+                Ludo.ControlPanel.dice.Image = Image.FromFile("Images/Dice/DiceBlank.png");
+
+                turnCount++;
+                Ludo.ControlPanel.turnCount.Text = $"Turn: {turnCount}";
+            }
         }
 
         public void rollDice()
@@ -123,7 +140,7 @@ namespace GameBoard
             Ludo.ControlPanel.piecebtnThree.Enabled = true;
             Ludo.ControlPanel.piecebtnFour.Enabled = true;
 
-            if ((diceValue == 5 || diceValue == 6) == false) // Disables buttons for pieces that are at home, if the player didn't get a globus
+            if ((diceValue == 5 || diceValue == 6) == false) // Disables buttons for pieces that are at home, if the player didn't get a globus or 6
             {
                 if (currentPlayer.pieces[0].placement is homeField)
                 {
@@ -156,7 +173,12 @@ namespace GameBoard
                 Ludo.ControlPanel.piecebtnThree.Enabled = false;
                 Ludo.ControlPanel.piecebtnFour.Enabled = false;
             }
-            else
+            else if (diceValue == 5)  // If the player got a globus it gets an extra turn
+            {
+                currentPlayerExtraTurn = true;
+                Console.WriteLine("globe");
+            }
+            else    // Ends turn if the player has no possible moves to do
             {
                 if (unmovablePiecesAtHome == 4)
                     turnEnd(99);

@@ -13,7 +13,7 @@ namespace GameBoard
         public Button dicebtn;
         public Button piecebtnOne, piecebtnTwo, piecebtnThree, piecebtnFour;
         public PictureBox dice;
-        public PictureBox finishRed, finishBlue, finishGreen, finishYellow, finishSimon;
+        public PictureBox finishRed, finishBlue, finishGreen, finishYellow;
         public TextBox currentPlayer;
         public TextBox currentStatus;
         public GameManager gameManager;
@@ -141,7 +141,6 @@ namespace GameBoard
 
         private void CurrentPlaytxt_TextChanged(object sender, EventArgs e)
         {
-   
             currentPlaytxt.Location = new Point(currentPlayer.Location.X + currentPlayer.Width/2 - TextRenderer.MeasureText(currentPlaytxt.Text, currentPlaytxt.Font).Width/2, currentPlayer.Location.Y + 8);
             currentPlaytxt.BackColor = currentPlayer.BackColor;
         }

@@ -183,7 +183,8 @@ namespace GameBoard
                     moveXfields(p, moves);
                     break;
                 case 3:
-                    moveToNextStar(p, 0);
+                    int nextStarIndex = findNextStar(p, 0) - p.placement.index; 
+                    moveToNextStar(p, nextStarIndex);
                     break;
                 case 5:
                     moveToNextGlobus(p);
@@ -270,7 +271,13 @@ namespace GameBoard
 
         private void moveToNextStar(Piece p, int moves)
         {
-            int index = p.placement.index + moves + 1;      // +1 so the piece jumps to the next star
+            int index = findNextStar(p, moves);
+            returnOtherPlayerHome(p, boardFields[index]);
+        }
+        
+        private int findNextStar(Piece p, int moves)
+        {
+            int index = p.placement.index + moves + 1;      // +1 so it doesn't "find" the star it's already on
             bool notFound = true;
 
             while (notFound)
@@ -283,11 +290,11 @@ namespace GameBoard
                         notFound = false;
                     else
                         index++;
-                }    
+                }
             }
-            returnOtherPlayerHome(p, boardFields[index]);
+            return index;
         }
-        
+
         private void returnOtherPlayerHome(Piece p, allFields newPlacement)
         {
             List<Piece> piecesAtField = findPiecesAtField(newPlacement);

@@ -40,7 +40,7 @@ namespace GameBoard
             Ludo.SetupControls();
 
             currentPlayer = chooseStartingPlayer();
-            Ludo.ControlPanel.currentPlayer.Text = currentPlayerString(currentPlayer);
+            Ludo.ControlPanel.currentPlaytxt.Text = currentPlayerString(currentPlayer);
 
             Ludo.ControlPanel.piecebtnOne.Enabled = false;
             Ludo.ControlPanel.piecebtnTwo.Enabled = false;
@@ -69,12 +69,16 @@ namespace GameBoard
             switch (player.team)
             {
                 case 1:
+                    Ludo.ControlPanel.currentPlayer.BackColor = Color.FromArgb(65, 147, 73);
                     return "Green";
                 case 2:
+                    Ludo.ControlPanel.currentPlayer.BackColor = Color.FromArgb(202, 5, 32);
                     return "Red";
                 case 3:
+                    Ludo.ControlPanel.currentPlayer.BackColor = Color.FromArgb(1, 126, 177);
                     return "Blue";
                 case 4:
+                    Ludo.ControlPanel.currentPlayer.BackColor = Color.FromArgb(221, 189, 34);
                     return "Yellow";
                 default:
                     return "Error";
@@ -93,7 +97,7 @@ namespace GameBoard
                 currentPlayer = players[currentPlayer.team];
             diceRollsForCurrentPlayer = 0;
 
-            Ludo.ControlPanel.currentPlayer.Text = currentPlayerString(currentPlayer);
+            Ludo.ControlPanel.currentPlaytxt.Text = currentPlayerString(currentPlayer);
             Ludo.ControlPanel.dicebtn.Enabled = true;
             Ludo.ControlPanel.piecebtnOne.Enabled = false;
             Ludo.ControlPanel.piecebtnTwo.Enabled = false;

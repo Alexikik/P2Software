@@ -33,3 +33,10 @@ C:\Users\Nicklas\Documents\GitHub\P2Software\GameBoard\GameBoard\obj\Debug\GameB
 C:\Users\Nicklas\Documents\GitHub\P2Software\GameBoard\GameBoard\obj\Debug\GameBoard.csproj.CoreCompileInputs.cache
 C:\Users\Nicklas\Documents\GitHub\P2Software\GameBoard\GameBoard\obj\Debug\GameBoard.exe
 C:\Users\Nicklas\Documents\GitHub\P2Software\GameBoard\GameBoard\obj\Debug\GameBoard.pdb
+C:\Users\Bruger\OneDrive - Aalborg Universitet\2.Semester\P2\Ludo\P2Software\GameBoard\GameBoard\bin\Debug\GameBoard.exe.config
+C:\Users\Bruger\OneDrive - Aalborg Universitet\2.Semester\P2\Ludo\P2Software\GameBoard\GameBoard\bin\Debug\GameBoard.exe
+C:\Users\Bruger\OneDrive - Aalborg Universitet\2.Semester\P2\Ludo\P2Software\GameBoard\GameBoard\bin\Debug\GameBoard.pdb
+C:\Users\Bruger\OneDrive - Aalborg Universitet\2.Semester\P2\Ludo\P2Software\GameBoard\GameBoard\obj\Debug\GameBoard.csprojAssemblyReference.cache
+C:\Users\Bruger\OneDrive - Aalborg Universitet\2.Semester\P2\Ludo\P2Software\GameBoard\GameBoard\obj\Debug\GameBoard.csproj.CoreCompileInputs.cache
+C:\Users\Bruger\OneDrive - Aalborg Universitet\2.Semester\P2\Ludo\P2Software\GameBoard\GameBoard\obj\Debug\GameBoard.exe
+C:\Users\Bruger\OneDrive - Aalborg Universitet\2.Semester\P2\Ludo\P2Software\GameBoard\GameBoard\obj\Debug\GameBoard.pdb

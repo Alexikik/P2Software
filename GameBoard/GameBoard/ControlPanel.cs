@@ -18,6 +18,7 @@ namespace GameBoard
         public TextBox currentStatus;
         public GameManager gameManager;
         public Label turnCount;
+        public Label currentPlaytxt;
 
         public ControlPanel(Point coordinates, GameManager gameManagerX)
         {
@@ -42,8 +43,17 @@ namespace GameBoard
             currentPlayer.Font = new Font("Arial", 25);
             currentPlayer.Location = new Point(dice.Location.X, dicebtn.Location.Y + dicebtn.Height + 20);
             currentPlayer.Enabled = false;
+            currentPlayer.ForeColor = Color.White;
             currentPlayer.TextAlign = HorizontalAlignment.Center;
-            currentPlayer.Text = "Thomas Tog";
+            currentPlayer.Text = "";
+
+            currentPlaytxt = new Label();
+            currentPlaytxt.Location = new Point(dice.Location.X + 50, dicebtn.Location.Y + dicebtn.Height + 30);
+            currentPlaytxt.Text = "";
+            currentPlaytxt.Size = new Size(100, 30);
+            currentPlaytxt.Font = new Font("Arial", 20);
+            currentPlaytxt.ForeColor = Color.White;
+            currentPlaytxt.BackColor = currentPlayer.BackColor;
 
             piecebtnOne = new Button();
             piecebtnOne.Size = new Size(100, 100);
@@ -103,6 +113,7 @@ namespace GameBoard
             turnCount.Text = $"Turn: {gameManager.turnCount}";
             turnCount.Location = new Point(dice.Location.X, finishGreen.Location.Y + finishGreen.Height + 5);
 
+            Controls.Add(currentPlaytxt);
             Controls.Add(dicebtn);
             Controls.Add(dice);
             Controls.Add(currentPlayer);
@@ -125,6 +136,14 @@ namespace GameBoard
             piecebtnThree.Click += PiecebtnThree_Click;
             piecebtnFour.Click += PiecebtnFour_Click;
             dicebtn.Click += Dicebtn_Click;
+            currentPlaytxt.TextChanged += CurrentPlaytxt_TextChanged;
+        }
+
+        private void CurrentPlaytxt_TextChanged(object sender, EventArgs e)
+        {
+   
+            currentPlaytxt.Location = new Point(currentPlayer.Location.X + currentPlayer.Width/2 - TextRenderer.MeasureText(currentPlaytxt.Text, currentPlaytxt.Font).Width/2, currentPlayer.Location.Y + 8);
+            currentPlaytxt.BackColor = currentPlayer.BackColor;
         }
 
         private void Dicebtn_Click(object sender, EventArgs e)

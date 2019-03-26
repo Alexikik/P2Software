@@ -11,10 +11,14 @@ namespace GameBoard
     {
         public List<Piece> pieces = new List<Piece>();
         public int team;   // 1:green, 2:red, 3:blue, 4:yellow
+        public int piecesInGoal;
+        public int placement;   // 0: aren't done yet, 1: firstplace, 2: secondplace, 3: thirdplace, 4: fourthplace
 
         public Player (int teamIn, GameBoard gameBoard)
         {
             team = teamIn;
+            piecesInGoal = 0;
+            placement = 0;
 
             int pieceIndex = 0;
             switch (team)
@@ -33,10 +37,8 @@ namespace GameBoard
                     break;
             }
 
-
             for (int i = 0; i < 4; i++)
                 pieces.Add(new Piece(this, i, gameBoard.allHomeFields[pieceIndex++]));
-            
         }
     }
 }

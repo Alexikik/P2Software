@@ -83,35 +83,35 @@ namespace GameBoard
             currentStatus.TextAlign = HorizontalAlignment.Center;
             currentStatus.Text = "Finished";
 
-            finishRed = new PictureBox();
-            finishRed.SizeMode = PictureBoxSizeMode.StretchImage;
-            finishRed.Image = Image.FromFile("Images/Pieces/red1.png");
-            finishRed.Size = new Size(100, 100);
-            finishRed.Location = new Point(dice.Location.X, currentStatus.Location.Y + currentStatus.Height + 20);
-
-            finishBlue = new PictureBox();
-            finishBlue.SizeMode = PictureBoxSizeMode.StretchImage;
-            finishBlue.Image = Image.FromFile("Images/Pieces/blue1.png");
-            finishBlue.Size = new Size(100, 100);
-            finishBlue.Location = new Point(dice.Location.X + finishRed.Width + 5, currentStatus.Location.Y + currentStatus.Height + 20);
+            finishYellow = new PictureBox();
+            finishYellow.SizeMode = PictureBoxSizeMode.StretchImage;
+            finishYellow.Image = Image.FromFile("Images/GoalOutlines/yellow.png");
+            finishYellow.Size = new Size(97, 97);
+            finishYellow.Location = new Point(dice.Location.X, currentStatus.Location.Y + currentStatus.Height + 20);
 
             finishGreen = new PictureBox();
             finishGreen.SizeMode = PictureBoxSizeMode.StretchImage;
-            finishGreen.Image = Image.FromFile("Images/Pieces/green1.png");
-            finishGreen.Size = new Size(100, 100);
-            finishGreen.Location = new Point(dice.Location.X, finishRed.Location.Y + finishRed.Height + 5);
+            finishGreen.Image = Image.FromFile("Images/GoalOutlines/green.png");
+            finishGreen.Size = new Size(97, 97);
+            finishGreen.Location = new Point(dice.Location.X + finishYellow.Width + 6, currentStatus.Location.Y + currentStatus.Height + 20);
 
-            finishYellow = new PictureBox();
-            finishYellow.SizeMode = PictureBoxSizeMode.StretchImage;
-            finishYellow.Image = Image.FromFile("Images/Pieces/yellow1.png");
-            finishYellow.Size = new Size(100, 100);
-            finishYellow.Location = new Point(dice.Location.X + finishRed.Width + 5, finishRed.Location.Y + finishRed.Height + 5);
+            finishBlue = new PictureBox();
+            finishBlue.SizeMode = PictureBoxSizeMode.StretchImage;
+            finishBlue.Image = Image.FromFile("Images/GoalOutlines/blue.png");
+            finishBlue.Size = new Size(97, 97);
+            finishBlue.Location = new Point(dice.Location.X, finishYellow.Location.Y + finishYellow.Height + 6);
+
+            finishRed = new PictureBox();
+            finishRed.SizeMode = PictureBoxSizeMode.StretchImage;
+            finishRed.Image = Image.FromFile("Images/GoalOutlines/red.png");
+            finishRed.Size = new Size(97, 97);
+            finishRed.Location = new Point(dice.Location.X + finishYellow.Width + 6, finishYellow.Location.Y + finishYellow.Height + 6);
 
             turnCount = new Label();
             turnCount.Size = new Size(200, 100);
             turnCount.Font = new Font("Arial", 25);
             turnCount.Text = $"Turn: {gameManager.turnCount}";
-            turnCount.Location = new Point(dice.Location.X, finishGreen.Location.Y + finishGreen.Height + 5);
+            turnCount.Location = new Point(dice.Location.X, finishBlue.Location.Y + finishBlue.Height + 5);
 
             Controls.Add(currentPlaytxt);
             Controls.Add(dicebtn);

@@ -47,4 +47,9 @@ namespace GameBoard
     {
         public globeField(int x1, int y1, int i) : base(x1, y1, i) { }
     }
+
+    public class goalField : allFields
+    {
+        public goalField(int x1, int y1, int i) : base(x1, y1, i) { }
+    }
 }

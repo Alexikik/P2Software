@@ -16,6 +16,10 @@ namespace GameBoard
         public List<pathField> pathPlayerRed = new List<pathField>();
         public List<pathField> pathPlayerBlue = new List<pathField>();
         public List<pathField> pathPlayerYellow = new List<pathField>();
+        public List<goalField> goalFieldsGreen = new List<goalField>();
+        public List<goalField> goalFieldsRed = new List<goalField>();
+        public List<goalField> goalFieldsBlue = new List<goalField>();
+        public List<goalField> goalFieldsYellow = new List<goalField>();
         public List<Player> players;
         GameManager gameManager;
         PictureBox gameBoard;
@@ -30,7 +34,8 @@ namespace GameBoard
             this.gameManager = gameManagerX;
             SetupFields();
             SetupAllHomeFields();
-            //SetupAllPathFields();
+            SetupAllPathFields();
+            SetupAllGoalFields();
             ControlPanel = new ControlPanel(new Point(766, 0), gameManager);
 
             // Ludo image
@@ -54,8 +59,6 @@ namespace GameBoard
             Controls.Add(ControlPanel);
             Controls.Add(gameBoard);
         }
-
-
         private void SetupFields()
         {
             int index = 0;
@@ -111,7 +114,6 @@ namespace GameBoard
             boardFields.Add(new normalField (310 + offset, 13  + offset, index++));
             boardFields.Add(new starField   (360 + offset, 13  + offset, index++));         //green star
         }
-
         private void SetupAllHomeFields()
         {
             int index = 0;
@@ -138,7 +140,6 @@ namespace GameBoard
             for (int i = 0; i < 2; i++)
                 allHomeFields.Add(new homeField(63 + offset + i * 49, 250 + offset, index++));
         }
-
         private void SetupAllPathFields()
         {
             int index = 0;
@@ -152,25 +153,60 @@ namespace GameBoard
             pathPlayerGreen.Add(new pathField(360 + offset, 261 + offset, index++));
 
             //Red
-            pathPlayerGreen.Add(new pathField(656 + offset, 360 + offset, index++));
-            pathPlayerGreen.Add(new pathField(607 + offset, 360 + offset, index++));
-            pathPlayerGreen.Add(new pathField(557 + offset, 360 + offset, index++));
-            pathPlayerGreen.Add(new pathField(508 + offset, 360 + offset, index++));
-            pathPlayerGreen.Add(new pathField(459 + offset, 360 + offset, index++));
+            index = 0;
+            pathPlayerRed.Add(new pathField(656 + offset, 360 + offset, index++));
+            pathPlayerRed.Add(new pathField(607 + offset, 360 + offset, index++));
+            pathPlayerRed.Add(new pathField(557 + offset, 360 + offset, index++));
+            pathPlayerRed.Add(new pathField(508 + offset, 360 + offset, index++));
+            pathPlayerRed.Add(new pathField(459 + offset, 360 + offset, index++));
 
             //Blue
-            pathPlayerGreen.Add(new pathField(360 + offset, 656 + offset, index++));
-            pathPlayerGreen.Add(new pathField(360 + offset, 607 + offset, index++));
-            pathPlayerGreen.Add(new pathField(360 + offset, 557 + offset, index++));
-            pathPlayerGreen.Add(new pathField(360 + offset, 508 + offset, index++));
-            pathPlayerGreen.Add(new pathField(360 + offset, 459 + offset, index++));
+            index = 0;
+            pathPlayerBlue.Add(new pathField(360 + offset, 656 + offset, index++));
+            pathPlayerBlue.Add(new pathField(360 + offset, 607 + offset, index++));
+            pathPlayerBlue.Add(new pathField(360 + offset, 557 + offset, index++));
+            pathPlayerBlue.Add(new pathField(360 + offset, 508 + offset, index++));
+            pathPlayerBlue.Add(new pathField(360 + offset, 459 + offset, index++));
 
             //Yellow
-            pathPlayerGreen.Add(new pathField(63 + offset,  360 + offset, index++));
-            pathPlayerGreen.Add(new pathField(112 + offset, 360 + offset, index++));
-            pathPlayerGreen.Add(new pathField(162 + offset, 360 + offset, index++));
-            pathPlayerGreen.Add(new pathField(211 + offset, 360 + offset, index++));
-            pathPlayerGreen.Add(new pathField(261 + offset, 360 + offset, index++));
+            index = 0;
+            pathPlayerYellow.Add(new pathField(63 + offset,  360 + offset, index++));
+            pathPlayerYellow.Add(new pathField(112 + offset, 360 + offset, index++));
+            pathPlayerYellow.Add(new pathField(162 + offset, 360 + offset, index++));
+            pathPlayerYellow.Add(new pathField(211 + offset, 360 + offset, index++));
+            pathPlayerYellow.Add(new pathField(261 + offset, 360 + offset, index++));
+        }
+        private void SetupAllGoalFields()
+        {
+            int index = 0;
+            int offset = 5;
+
+            // Yellow
+            goalFieldsYellow.Add(new goalField(792 + offset, 548 + offset - 30, index++));
+            goalFieldsYellow.Add(new goalField(goalFieldsYellow[0].x + 34 + 7, goalFieldsYellow[0].y, index++));
+            goalFieldsYellow.Add(new goalField(goalFieldsYellow[0].x, goalFieldsYellow[0].y + 34 + 7, index++));
+            goalFieldsYellow.Add(new goalField(goalFieldsYellow[2].x + 34 + 7, goalFieldsYellow[2].y, index++));
+
+            // Green
+            index = 0;
+            goalFieldsGreen.Add(new goalField(895 + offset, 548 + offset - 30, index++));
+            goalFieldsGreen.Add(new goalField(goalFieldsGreen[0].x + 34 + 7, goalFieldsGreen[0].y, index++));
+            goalFieldsGreen.Add(new goalField(goalFieldsGreen[0].x, goalFieldsGreen[0].y + 34 + 7, index++));
+            goalFieldsGreen.Add(new goalField(goalFieldsGreen[2].x + 34 + 7, goalFieldsGreen[2].y, index++));
+
+            // Blue
+            index = 0;
+            goalFieldsBlue.Add(new goalField(792 + offset, 651 + offset - 30, index++));
+            goalFieldsBlue.Add(new goalField(goalFieldsBlue[0].x + 34 + 7, goalFieldsBlue[0].y, index++));
+            goalFieldsBlue.Add(new goalField(goalFieldsBlue[0].x, goalFieldsBlue[0].y + 34 + 7, index++));
+            goalFieldsBlue.Add(new goalField(goalFieldsBlue[2].x + 34 + 7, goalFieldsBlue[2].y, index++));
+
+            // Red
+            index = 0;
+            goalFieldsRed.Add(new goalField(895 + offset, 651 + offset - 30, index++));
+            goalFieldsRed.Add(new goalField(goalFieldsRed[0].x + 34 + 7, goalFieldsRed[0].y, index++));
+            goalFieldsRed.Add(new goalField(goalFieldsRed[0].x, goalFieldsRed[0].y + 34 + 7, index++));
+            goalFieldsRed.Add(new goalField(goalFieldsRed[2].x + 34 + 7, goalFieldsRed[2].y, index++));
         }
 
         public void movePiece(Piece p, int moves)
@@ -225,14 +261,14 @@ namespace GameBoard
             if (p.placement.index + moves >= boardFields.Count) // Starts back from the start
             {
                 int remainingMoves = moves - (boardFields.Count - p.placement.index);
-                returnOtherPlayerHome(p, boardFields[0 + remainingMoves]);
+                checkIfGoOnPath(p, boardFields[0 + remainingMoves]);
             }
             else   
             {
                 if (boardFields[p.placement.index + moves] is starField)   // Check if it's a starfield
                     moveToNextStar(p, moves);
                 else
-                    returnOtherPlayerHome(p, boardFields[p.placement.index + moves]);
+                    checkIfGoOnPath(p, boardFields[p.placement.index + moves]);
             }
         }
 
@@ -240,13 +276,19 @@ namespace GameBoard
         {
             int ifHomefield = checkIfHomefield(p);
 
-            if (ifHomefield != 0)
+            if (ifHomefield != 0)   // Moves the player out of home
             {
+                List<Piece> piecesAtField = findPiecesAtField(boardFields[ifHomefield]);
+                foreach (Piece piece in piecesAtField)
+                {
+                    if (piece.player != p.player)
+                        movePieceHome(piece);
+                }
                 returnOtherPlayerHome(p, boardFields[ifHomefield]);
             }
-            else
+            else    // Moves the player to the next globus
             {
-                returnOtherPlayerHome(p, boardFields[findNextGlobus(p)]);
+                checkIfGoOnPath(p, boardFields[findNextGlobus(p)]);
             }
         }
         private int findNextGlobus(Piece p)
@@ -272,7 +314,7 @@ namespace GameBoard
         private void moveToNextStar(Piece p, int moves)
         {
             int index = findNextStar(p, moves);
-            returnOtherPlayerHome(p, boardFields[index]);
+            checkIfGoOnPath(p, boardFields[index]);
         }
         
         private int findNextStar(Piece p, int moves)
@@ -298,6 +340,7 @@ namespace GameBoard
         private void returnOtherPlayerHome(Piece p, allFields newPlacement)
         {
             List<Piece> piecesAtField = findPiecesAtField(newPlacement);
+            piecesAtField.Remove(p);
 
             // Reacts to how many pieces is in piecesAtField list
             switch (piecesAtField.Count)
@@ -318,10 +361,15 @@ namespace GameBoard
                         p.picture.Size = new Size(15, 15);
                         p.picture.Location = new Point(piecesAtField[0].picture.Location.X + 19, piecesAtField[0].picture.Location.Y);
                     }
-                    else
+                    else    // If the two pieces are on different teams
                     {
-                        movePieceHome(piecesAtField[0]);    // Moves other player home
-                        resetSizeBeforeMove(p, newPlacement);           // Moves current player to field
+                        if (newPlacement is globeField) // A piece is secured on a globefield
+                            movePieceHome(p);
+                        else
+                        {
+                            movePieceHome(piecesAtField[0]);    // Moves other player home
+                            resetSizeBeforeMove(p, newPlacement);           // Moves current player to field
+                        }
                     }
                     break;
                 case 2:     // Two pieces at the field
@@ -498,7 +546,6 @@ namespace GameBoard
         private int findPieceOnLeft(List<Piece> pieces) // Returns index of left piece
         {
             int dx;
-            Piece pLeft, pRight;
 
             // Find piece on the left
             dx = pieces[0].picture.Location.X - pieces[1].picture.Location.X;
@@ -507,6 +554,208 @@ namespace GameBoard
             else
                 return 0;
         }
+
+        private void checkIfGoOnPath(Piece p, allFields newPlacement)
+        {
+            int pathFieldIndex = getPlayersPathFieldIndex(p);
+            List<pathField> pathFields = getPlayersPathFields(p);
+
+            if (newPlacement is homeField || newPlacement is pathField)
+            {
+                returnOtherPlayerHome(p, newPlacement);
+            }
+            else if (p.placement.index == pathFieldIndex)   // If the piece is right outside of path
+            {
+                switch (gameManager.diceValue)
+                {
+                    case 1:
+                    case 2:
+                    case 4:
+                    case 6:
+                        moveXfieldsOnPath(p, gameManager.diceValue - 1);
+                        break;
+                    case 3:
+                        movePieceGoal(p);
+                        break;
+                    case 5:
+                        returnOtherPlayerHome(p, pathFields[0]);
+                        break;
+                }
+            }
+            else if (p.placement.index < pathFieldIndex && newPlacement.index > pathFieldIndex 
+                || p.placement.index > newPlacement.index && pathFieldIndex > p.placement.index) // If the piece moves past the path entry
+            {
+                if (p.placement.index + gameManager.diceValue < 52 && boardFields[p.placement.index + gameManager.diceValue] is starField)    // If the piece lands on the star outside it's path
+                    movePieceGoal(p);
+                else
+                {
+                    switch (gameManager.diceValue)
+                    {
+                        case 1:
+                        case 2:
+                        case 4:
+                        case 6:
+                            int remainingMoves = newPlacement.index - pathFieldIndex;
+                            if (remainingMoves < 0)
+                                remainingMoves = pathFieldIndex - p.placement.index;
+                            moveXfieldsOnPath(p, remainingMoves - 1);
+                            break;
+                        case 3:
+                            movePieceGoal(p);
+                            break;
+                        case 5:
+                            returnOtherPlayerHome(p, pathFields[0]);
+                            break;
+                    }
+                }
+            }
+            else if (p.placement is pathField) // If the piece already are on path
+            {
+                if (gameManager.diceValue == 3 || gameManager.diceValue == 5)
+                    movePieceGoal(p);   // Both star and globus moves the piece to goal
+                else
+                    moveXfieldsOnPath(p, gameManager.diceValue);
+            }
+            else
+            {
+                returnOtherPlayerHome(p, newPlacement);
+            }
+        }
+
+        private void moveXfieldsOnPath(Piece p, int moves)
+        {
+            List<pathField> pathFields = getPlayersPathFields(p);
+            int index = moves;
+
+            if ((p.placement is pathField) == false)    
+            {
+                if (index == 5) // If the player rolled 6, the piece will hit the goal
+                    movePieceGoal(p);   // Player is in goal
+                else
+                    returnOtherPlayerHome(p, pathFields[index]);
+            }
+            else
+            {
+                int newPlacementIndex = p.placement.index + index;
+                if (newPlacementIndex == 5)
+                    movePieceGoal(p);
+                else if (newPlacementIndex < 5)
+                    returnOtherPlayerHome(p, pathFields[newPlacementIndex]);
+                else
+                {
+                    int fieldsToGoal = 5 - p.placement.index;
+                    index = 5 - (index - fieldsToGoal);
+                    //index -= 2 * (index - 5);   // I = I - 2(I-5)
+                    returnOtherPlayerHome(p, pathFields[index]);
+                }
+            }
+        }
+
+        private int getPlayersPathFieldIndex(Piece p)
+        {
+            int pathFieldIndex;
+
+            switch (p.player.team)
+            {
+                case 1:
+                    pathFieldIndex = 51;
+                    break;
+                case 2:
+                    pathFieldIndex = 12;
+                    break;
+                case 3:
+                    pathFieldIndex = 25;
+                    break;
+                case 4:
+                    pathFieldIndex = 38;
+                    break;
+                default:
+                    pathFieldIndex = 99;
+                    break;
+            }
+            return pathFieldIndex;
+        }
+        private List<pathField> getPlayersPathFields(Piece p)
+        {
+            List<pathField> pathFields;
+
+            switch (p.player.team)
+            {
+                case 1:
+                    pathFields = pathPlayerGreen;
+                    break;
+                case 2:
+                    pathFields = pathPlayerRed;
+                    break;
+                case 3:
+                    pathFields = pathPlayerBlue;
+                    break;
+                case 4:
+                    pathFields = pathPlayerYellow;
+                    break;
+                default:
+                    pathFields = new List<pathField>();
+                    break;
+            }
+            return pathFields;
+        }
+
+        public void movePieceGoal(Piece p)
+        {
+            List<goalField> goalFields;
+
+            switch (p.player.team)
+            {
+                case 1:
+                    goalFields = goalFieldsGreen;
+                    break;
+                case 2:
+                    goalFields = goalFieldsRed;
+                    break;
+                case 3:
+                    goalFields = goalFieldsBlue;
+                    break;
+                case 4:
+                    goalFields = goalFieldsYellow;
+                    break;
+                default:
+                    goalFields = new List<goalField>();
+                    break;
+            }
+
+            p.player.piecesInGoal++;
+            resetSizeBeforeMove(p, goalFields[p.number]);
+            p.picture.Size = new Size(34, 34);
+
+            if (p.player.pieces[0].placement is goalField 
+                && p.player.pieces[1].placement is goalField 
+                && p.player.pieces[2].placement is goalField 
+                && p.player.pieces[3].placement is goalField)
+            {
+                p.player.placement = getPlayerPlacement(p.player);
+            }
+        }
+
+        private int getPlayerPlacement(Player currentPlayer)
+        {
+            int placement = 1;
+            bool notDone = true;
+
+            while (notDone)
+            {
+                int placementUnchanged = placement;
+                foreach (Player player in players)
+                {
+                    if (player.placement == placement)
+                        placement++;
+                }
+                if (placement == placementUnchanged)
+                    notDone = false;
+            }
+
+            return placement;
+        }
+
     }
 }
 

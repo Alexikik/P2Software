@@ -12,15 +12,17 @@ namespace GameBoard
     {
         public Player player;  // 1:green, 2:red, 3:blue, 4:yellow
         public allFields placement;
+        public int number;
 
         public PictureBox picture;
 
-        public Piece(Player player, int num, allFields placement)
+        public Piece(Player player, int number, allFields placement)
         {
             this.player = player;
             this.placement = placement;
+            this.number = number;
 
-            picture = MakePiece(placement, num);
+            picture = MakePiece(placement, number);
         }
 
 

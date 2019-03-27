@@ -583,7 +583,7 @@ namespace GameBoard
                 }
             }
             else if (p.placement.index < pathFieldIndex && newPlacement.index > pathFieldIndex 
-                || p.placement.index > newPlacement.index && pathFieldIndex > p.placement.index) // If the piece moves past the path entry
+                     || p.placement.index > newPlacement.index && pathFieldIndex > p.placement.index) // If the piece moves past the path entry
             {
                 if (p.placement.index + gameManager.diceValue < 52 && boardFields[p.placement.index + gameManager.diceValue] is starField)    // If the piece lands on the star outside it's path
                     movePieceGoal(p);
@@ -597,7 +597,7 @@ namespace GameBoard
                         case 6:
                             int remainingMoves = newPlacement.index - pathFieldIndex;
                             if (remainingMoves < 0)
-                                remainingMoves = pathFieldIndex - p.placement.index;
+                                remainingMoves = newPlacement.index + 1; // pathFieldIndex - p.placement.index;
                             moveXfieldsOnPath(p, remainingMoves - 1);
                             break;
                         case 3:

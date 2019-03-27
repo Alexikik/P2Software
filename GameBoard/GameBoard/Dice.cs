@@ -8,7 +8,7 @@ namespace GameBoard
 {
   public class Dice
   {
-    Random rnd = new Random();
+    Random rnd = new Random();  // The seed for the dice is made here
 
     public int Roll()
     {

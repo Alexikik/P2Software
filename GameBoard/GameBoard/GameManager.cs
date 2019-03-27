@@ -84,14 +84,14 @@ namespace GameBoard
             //    Ludo.movePieceGoal(players[3].pieces[i]);
 
             // Testing all players starting right outside of path
-            //for (int i = 0; i < 4; i++)
-            //    players[0].pieces[i].newField(Ludo.boardFields[50]);
-            //for (int i = 0; i < 4; i++)
-            //    players[1].pieces[i].newField(Ludo.boardFields[11]);
-            //for (int i = 0; i < 4; i++)
-            //    players[2].pieces[i].newField(Ludo.boardFields[24]);
-            //for (int i = 0; i < 4; i++)
-            //    players[3].pieces[i].newField(Ludo.boardFields[37]);
+            for (int i = 0; i < 4; i++)
+                players[0].pieces[i].newField(Ludo.boardFields[50]);
+            for (int i = 0; i < 4; i++)
+                players[1].pieces[i].newField(Ludo.boardFields[11]);
+            for (int i = 0; i < 4; i++)
+                players[2].pieces[i].newField(Ludo.boardFields[24]);
+            for (int i = 0; i < 4; i++)
+                players[3].pieces[i].newField(Ludo.boardFields[37]);
             #endregion This region is used for testing
 
             Application.Run(Ludo);
@@ -238,9 +238,9 @@ namespace GameBoard
 
             text = $"The game is done! \n" +
                 $"Congratulations to player {currentPlayerString(p1)} for winning! \n" +
-                $"Player {currentPlayerString(p2)} got secondplace \n" +
-                $"Player {currentPlayerString(p3)} got thirdplace \n" +
-                $"Player {currentPlayerString(p4)} got fourthplace \n \n" +
+                $"Player {currentPlayerString(p2)} got second place \n" +
+                $"Player {currentPlayerString(p3)} got third place \n" +
+                $"Player {currentPlayerString(p4)} got fourth place \n \n" +
                 $"Thanks for playing!";
 
             Ludo.ControlPanel.currentPlaytxt.Text = currentPlayerString(p1);    // Sets display to winning player

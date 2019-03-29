@@ -10,13 +10,13 @@ namespace GameBoard
 {
     public class Piece
     {
-        public Player player;  // 1:green, 2:red, 3:blue, 4:yellow
+        public AllPlayers player;  // 1:green, 2:red, 3:blue, 4:yellow
         public allFields placement;
         public int number;
 
         public PictureBox picture;
 
-        public Piece(Player player, int number, allFields placement)
+        public Piece(AllPlayers player, int number, allFields placement)
         {
             this.player = player;
             this.placement = placement;

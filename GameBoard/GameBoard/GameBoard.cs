@@ -20,12 +20,12 @@ namespace GameBoard
         public List<goalField> goalFieldsRed = new List<goalField>();
         public List<goalField> goalFieldsBlue = new List<goalField>();
         public List<goalField> goalFieldsYellow = new List<goalField>();
-        public List<Player> players;
-        GameManager gameManager;
+        public List<AllPlayers> players;
+        public GameManager gameManager;
         PictureBox gameBoard;
         public ControlPanel ControlPanel;
 
-        public GameBoard(List<Player> players, GameManager gameManagerX)
+        public GameBoard(List<AllPlayers> players, GameManager gameManagerX)
         {
             // Setup
             this.Height = 804;
@@ -531,7 +531,7 @@ namespace GameBoard
             List<Piece> piecesAtField = new List<Piece>();
 
             // Adds all pieces at newPlacement to piecesAtField list
-            foreach (Player player in players)
+            foreach (AllPlayers player in players)
             {
                 foreach (Piece piece in player.pieces)
                 {
@@ -736,7 +736,7 @@ namespace GameBoard
             }
         }
 
-        private int getPlayerPlacement(Player currentPlayer)
+        private int getPlayerPlacement(AllPlayers currentPlayer)
         {
             int placement = 1;
             bool notDone = true;
@@ -744,7 +744,7 @@ namespace GameBoard
             while (notDone)
             {
                 int placementUnchanged = placement;
-                foreach (Player player in players)
+                foreach (AllPlayers player in players)
                 {
                     if (player.placement == placement)
                         placement++;

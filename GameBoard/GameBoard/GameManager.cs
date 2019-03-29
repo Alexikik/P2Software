@@ -10,9 +10,9 @@ namespace GameBoard
 {
     public class GameManager
     {
-        public List<Player> players = new List<Player>();
+        public List<AllPlayers> players = new List<AllPlayers>();
         public GameBoard Ludo;
-        public Player currentPlayer;
+        public AllPlayers currentPlayer;
         public int diceRollsForCurrentPlayer;
         public bool currentPlayerExtraTurn;
         public Dice dice;
@@ -23,7 +23,8 @@ namespace GameBoard
 
         public GameManager()
         {
-            setupGame();
+            //setupGame();
+            setupGameWithXela();
         }
 
 
@@ -38,7 +39,7 @@ namespace GameBoard
 
             for (int i = 0; i < 4; i++)
             {
-                players.Add(new Player(i + 1, Ludo));
+                players.Add(new HumanPlayer(i + 1, Ludo));
             }
 
             Ludo.SetupControls();
@@ -61,11 +62,11 @@ namespace GameBoard
             currentPlayerExtraTurn = false;
             gameDone = false;
 
-            players.Add(new Xela(1, Ludo));
-            for (int i = 1; i < 4; i++)
-            {
-                players.Add(new Player(i + 1, Ludo));
-            }
+            
+            players.Add(new HumanPlayer(1, Ludo));
+            players.Add(new Xela(2, Ludo));
+            players.Add(new Xela(3, Ludo));
+            players.Add(new Xela(4, Ludo));
 
             Ludo.SetupControls();
 
@@ -123,7 +124,7 @@ namespace GameBoard
             Application.Run(Ludo);
         }
 
-        private Player chooseStartingPlayer()
+        private AllPlayers chooseStartingPlayer()
         {
             Random seed = new Random();
 
@@ -132,7 +133,7 @@ namespace GameBoard
             return players[randValue];
         }
 
-        private string currentPlayerString(Player player)
+        private string currentPlayerString(AllPlayers player)
         {
             switch (player.team)
             {
@@ -167,6 +168,9 @@ namespace GameBoard
                 Ludo.ControlPanel.piecebtnTwo.Enabled = false;
                 Ludo.ControlPanel.piecebtnThree.Enabled = false;
                 Ludo.ControlPanel.piecebtnFour.Enabled = false;
+
+                if (players[currentPlayer.team - 1] is Xela)
+                    giveTurnToXela();
             }
             else    // If the player doesn't have an extra turn
             {
@@ -188,6 +192,9 @@ namespace GameBoard
 
                     turnCount++;
                     Ludo.ControlPanel.turnCount.Text = $"Turn: {turnCount}";
+
+                    if (players[currentPlayer.team - 1] is Xela)
+                        giveTurnToXela();
                 }
                 else    // If the game is done (All players have gotten their pieces into goal)
                 {
@@ -207,7 +214,7 @@ namespace GameBoard
         }
         private string getGameEndText()
         {
-            Player p1 = players[1], p2 = players[1], p3 = players[1], p4 = players[1];  // Assignments are only temporary!
+            AllPlayers p1 = players[1], p2 = players[1], p3 = players[1], p4 = players[1];  // Assignments are only temporary!
             string text;
             bool notDone = true;
 
@@ -274,9 +281,9 @@ namespace GameBoard
             return text;
         }
 
-        private Player nextPlayer(Player currentPlayer)
+        private AllPlayers nextPlayer(AllPlayers currentPlayer)
         {
-            Player nextPlayer = currentPlayer;
+            AllPlayers nextPlayer = currentPlayer;
             bool notDone = true;
             
             while (notDone)
@@ -290,7 +297,7 @@ namespace GameBoard
                 // Checks if the next player is done, if not it's done, if not then repeat
                 if (nextPlayer.placement == 0)  
                     notDone = false;
-                else if (nextPlayer == currentPlayer)   // if all players are done
+                else if (nextPlayer.team == currentPlayer.team)   // if all players are done
                 {
                     notDone = false;
                     gameDone = true;
@@ -380,5 +387,10 @@ namespace GameBoard
             }
         }
 
+        private void giveTurnToXela()
+        {
+            Console.WriteLine(turnCount + ": " + currentPlayer.team);
+            players[currentPlayer.team - 1].takeTurn();
+        }
     }
 }

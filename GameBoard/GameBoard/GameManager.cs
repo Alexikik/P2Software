@@ -52,6 +52,32 @@ namespace GameBoard
             Ludo.ControlPanel.turnCount.Text = $"Turn: {turnCount}";
         }
 
+        private void setupGameWithXela()
+        {
+            Ludo = new GameBoard(players, this);
+            dice = new Dice();
+            turnCount = 1;
+            diceRollsForCurrentPlayer = 0;
+            currentPlayerExtraTurn = false;
+            gameDone = false;
+
+            players.Add(new Xela(1, Ludo));
+            for (int i = 1; i < 4; i++)
+            {
+                players.Add(new Player(i + 1, Ludo));
+            }
+
+            Ludo.SetupControls();
+
+            currentPlayer = chooseStartingPlayer();
+
+            Ludo.ControlPanel.piecebtnOne.Enabled = false;
+            Ludo.ControlPanel.piecebtnTwo.Enabled = false;
+            Ludo.ControlPanel.piecebtnThree.Enabled = false;
+            Ludo.ControlPanel.piecebtnFour.Enabled = false;
+            Ludo.ControlPanel.turnCount.Text = $"Turn: {turnCount}";
+        }
+
         public void playGame()
         {
             Application.EnableVisualStyles();
@@ -84,14 +110,14 @@ namespace GameBoard
             //    Ludo.movePieceGoal(players[3].pieces[i]);
 
             // Testing all players starting right outside of path
-            for (int i = 0; i < 4; i++)
+            /*for (int i = 0; i < 4; i++)
                 players[0].pieces[i].newField(Ludo.boardFields[50]);
             for (int i = 0; i < 4; i++)
                 players[1].pieces[i].newField(Ludo.boardFields[11]);
             for (int i = 0; i < 4; i++)
                 players[2].pieces[i].newField(Ludo.boardFields[24]);
             for (int i = 0; i < 4; i++)
-                players[3].pieces[i].newField(Ludo.boardFields[37]);
+                players[3].pieces[i].newField(Ludo.boardFields[37]);*/
             #endregion This region is used for testing
 
             Application.Run(Ludo);

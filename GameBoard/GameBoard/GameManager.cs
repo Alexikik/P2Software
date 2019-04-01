@@ -133,7 +133,7 @@ namespace GameBoard
             return players[randValue];
         }
 
-        private string currentPlayerString(AllPlayers player)
+        public string currentPlayerString(AllPlayers player)
         {
             switch (player.team)
             {
@@ -389,7 +389,7 @@ namespace GameBoard
 
         private void giveTurnToXela()
         {
-            Console.WriteLine(turnCount + ": " + currentPlayer.team);
+            //Console.WriteLine(turnCount + ": " + currentPlayer.team);
             players[currentPlayer.team - 1].takeTurn();
         }
     }

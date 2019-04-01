@@ -317,7 +317,7 @@ namespace GameBoard
             checkIfGoOnPath(p, boardFields[index]);
         }
         
-        private int findNextStar(Piece p, int moves)
+        public int findNextStar(Piece p, int moves)
         {
             int index = p.placement.index + moves + 1;      // +1 so it doesn't "find" the star it's already on
             bool notFound = true;
@@ -526,7 +526,7 @@ namespace GameBoard
             p.newField(newPlacement);
         }
 
-        private List<Piece> findPiecesAtField(allFields field)
+        public List<Piece> findPiecesAtField(allFields field)
         {
             List<Piece> piecesAtField = new List<Piece>();
 

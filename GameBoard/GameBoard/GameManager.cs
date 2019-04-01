@@ -63,8 +63,8 @@ namespace GameBoard
             gameDone = false;
 
             
-            players.Add(new HumanPlayer(1, Ludo));
-            players.Add(new Xela(2, Ludo));
+            players.Add(new Xela(1, Ludo));
+            players.Add(new HumanPlayer(2, Ludo));
             players.Add(new Xela(3, Ludo));
             players.Add(new Xela(4, Ludo));
 

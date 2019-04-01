@@ -12,7 +12,7 @@ namespace GameBoard
     {
         public AllPlayers player;  // 1:green, 2:red, 3:blue, 4:yellow
         public allFields placement;
-        public int number;
+        public int number;          // Zero based
 
         public PictureBox picture;
 

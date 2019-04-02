@@ -21,8 +21,9 @@ namespace GameBoard
         public override void takeTurn()
         {
             System.Threading.Thread.Sleep(1*1000);  // Timer waits 1 second
+            //System.Threading.Tasks.Task.Delay(1 * 1000);
 
-            Console.WriteLine(gameManager.turnCount + $": Helo c: [{gameManager.currentPlayerString(this)}]");
+            Console.WriteLine("\n" + gameManager.turnCount + $": Helo c: [{gameManager.currentPlayerString(this)}]");
             bool notDone = true;
             int bestPieceToMove;
 

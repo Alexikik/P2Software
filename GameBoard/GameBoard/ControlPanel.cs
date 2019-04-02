@@ -19,6 +19,7 @@ namespace GameBoard
         public GameManager gameManager;
         public Label turnCount;
         public Label currentPlaytxt;
+        public List<Button> btnList;
 
         public ControlPanel(Point coordinates, GameManager gameManagerX)
         {
@@ -112,6 +113,12 @@ namespace GameBoard
             turnCount.Font = new Font("Arial", 25);
             turnCount.Text = $"Turn: {gameManager.turnCount}";
             turnCount.Location = new Point(dice.Location.X, finishBlue.Location.Y + finishBlue.Height + 5);
+
+            btnList = new List<Button>();
+            btnList.Add(piecebtnOne);
+            btnList.Add(piecebtnTwo);
+            btnList.Add(piecebtnThree);
+            btnList.Add(piecebtnFour);
 
             Controls.Add(currentPlaytxt);
             Controls.Add(dicebtn);

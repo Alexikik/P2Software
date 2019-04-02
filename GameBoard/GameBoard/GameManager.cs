@@ -64,7 +64,7 @@ namespace GameBoard
 
             
             players.Add(new Xela(1, Ludo));
-            players.Add(new HumanPlayer(2, Ludo));
+            players.Add(new Xela(2, Ludo));
             players.Add(new Xela(3, Ludo));
             players.Add(new Xela(4, Ludo));
 
@@ -111,14 +111,14 @@ namespace GameBoard
             //    Ludo.movePieceGoal(players[3].pieces[i]);
 
             // Testing all players starting right outside of path
-            /*for (int i = 0; i < 4; i++)
-                players[0].pieces[i].newField(Ludo.boardFields[50]);
-            for (int i = 0; i < 4; i++)
-                players[1].pieces[i].newField(Ludo.boardFields[11]);
-            for (int i = 0; i < 4; i++)
-                players[2].pieces[i].newField(Ludo.boardFields[24]);
-            for (int i = 0; i < 4; i++)
-                players[3].pieces[i].newField(Ludo.boardFields[37]);*/
+            //for (int i = 0; i < 4; i++)
+            //    players[0].pieces[i].newField(Ludo.boardFields[50]);
+            //for (int i = 0; i < 4; i++)
+            //    players[1].pieces[i].newField(Ludo.boardFields[11]);
+            //for (int i = 0; i < 4; i++)
+            //    players[2].pieces[i].newField(Ludo.boardFields[24]);
+            //for (int i = 0; i < 4; i++)
+            //    players[3].pieces[i].newField(Ludo.boardFields[37]);
             #endregion This region is used for testing
 
             Application.Run(Ludo);

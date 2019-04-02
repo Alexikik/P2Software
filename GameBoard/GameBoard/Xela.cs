@@ -22,9 +22,6 @@ namespace GameBoard
         {
             await Task.Delay(1 * 1000);
 
-            //System.Threading.Thread.Sleep(1*1000);  // Timer waits 1 second
-            //System.Threading.Tasks.Task.Delay(1 * 1000);
-
             Console.WriteLine("\n" + gameManager.turnCount + $": Helo c: [{gameManager.currentPlayerString(this)}]");
             bool notDone = true;
             int bestPieceToMove;
@@ -122,7 +119,6 @@ namespace GameBoard
         private List<Piece> moveablePieces()
         {
             List<Piece> moveablePieces = new List<Piece>();
-            //moveablePieces = pieces;
 
             if (gameManager.Ludo.ControlPanel.piecebtnOne.Enabled)
                 moveablePieces.Add(pieces[0]);
@@ -132,51 +128,8 @@ namespace GameBoard
                 moveablePieces.Add(pieces[2]);
             if (gameManager.Ludo.ControlPanel.piecebtnFour.Enabled)
                 moveablePieces.Add(pieces[3]);
-
-            //if (!gameManager.Ludo.ControlPanel.piecebtnOne.Enabled)
-            //    moveablePieces.Remove(pieces[0]);
-            //if (!gameManager.Ludo.ControlPanel.piecebtnTwo.Enabled)
-            //    moveablePieces.Remove(pieces[1]);
-            //if (!gameManager.Ludo.ControlPanel.piecebtnThree.Enabled)
-            //    moveablePieces.Remove(pieces[2]);
-            //if (!gameManager.Ludo.ControlPanel.piecebtnFour.Enabled)
-            //    moveablePieces.Remove(pieces[3]);
-
+            
             return moveablePieces;
         }
     }
 }
-
-
-
-//if (gameManager.Ludo.ControlPanel.piecebtnOne.Enabled)
-//{
-//    Console.WriteLine($"[{gameManager.turnCount}] {gameManager.currentPlayerString(gameManager.currentPlayer)} \n" +
-//    $"    Dice: [{gameManager.diceValue}] Piece: 1");
-//    gameManager.turnEnd(1);
-//}
-//else if (gameManager.Ludo.ControlPanel.piecebtnTwo.Enabled)
-//{
-//    Console.WriteLine($"[{gameManager.turnCount}] {gameManager.currentPlayerString(gameManager.currentPlayer)} \n" +
-//    $"    Dice: [{gameManager.diceValue}] Piece: 2");
-//    gameManager.turnEnd(2);
-//}
-//else if (gameManager.Ludo.ControlPanel.piecebtnThree.Enabled)
-//{
-//    Console.WriteLine($"[{gameManager.turnCount}] {gameManager.currentPlayerString(gameManager.currentPlayer)} \n" +
-//    $"    Dice: [{gameManager.diceValue}] Piece: 3");
-//    gameManager.turnEnd(3);
-//}
-//else if (gameManager.Ludo.ControlPanel.piecebtnFour.Enabled)
-//{
-//    Console.WriteLine($"[{gameManager.turnCount}] {gameManager.currentPlayerString(gameManager.currentPlayer)} \n" +
-//    $"    Dice: [{gameManager.diceValue}] Piece: 4");
-//    gameManager.turnEnd(4);
-//}
-
-//else if (gameManager.Ludo.ControlPanel.dicebtn.Enabled)
-//{
-//    Console.WriteLine($"[{gameManager.turnCount}] {gameManager.currentPlayerString(gameManager.currentPlayer)} \n" +
-//    $"    Dice: [{gameManager.diceValue}] CAN NOT MOVE!");
-//    gameManager.rollDice();
-//}

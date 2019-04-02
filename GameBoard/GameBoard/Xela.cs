@@ -18,9 +18,11 @@ namespace GameBoard
             gameManager = gameBoard.gameManager;
         }
 
-        public override void takeTurn()
+        public async override void takeTurn()
         {
-            System.Threading.Thread.Sleep(1*1000);  // Timer waits 1 second
+            await Task.Delay(1 * 1000);
+
+            //System.Threading.Thread.Sleep(1*1000);  // Timer waits 1 second
             //System.Threading.Tasks.Task.Delay(1 * 1000);
 
             Console.WriteLine("\n" + gameManager.turnCount + $": Helo c: [{gameManager.currentPlayerString(this)}]");
@@ -33,14 +35,19 @@ namespace GameBoard
 
                 if (gameManager.currentPlayer.team != team)
                     notDone = false;
+                else
+                {
+                    bestPieceToMove = calculateBestMove() + 1;  // Finds best move
 
-                bestPieceToMove = calculateBestMove() + 1;
-                Console.WriteLine($"[{gameManager.turnCount}] {gameManager.currentPlayerString(gameManager.currentPlayer)} \n" +
-                    $"    Dice: [{gameManager.diceValue}] Piece: {bestPieceToMove}");
-                gameManager.turnEnd(bestPieceToMove);
+                    Console.WriteLine($"[{gameManager.turnCount}] {gameManager.currentPlayerString(gameManager.currentPlayer)} \n" +
+                        $"    Dice: [{gameManager.diceValue}] Piece: {bestPieceToMove}");   // Prints best move
 
-                if (gameManager.currentPlayer.team != team)
-                    notDone = false;
+                    gameManager.turnEnd(bestPieceToMove);   // Does best move
+
+                    if (gameManager.currentPlayer.team != team)
+                        notDone = false;
+                }
+
             }
         }
 

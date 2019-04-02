@@ -11,11 +11,15 @@ namespace GameBoard
     {
         public List<AllPlayers> allPlayers;
         GameManager gameManager;
+        public List<bool> canMovePiece = new List<bool>();
+
         
         public Xela(int teamIn, GameBoard gameBoard) : base(teamIn, gameBoard)
         {
             allPlayers = gameBoard.players;
             gameManager = gameBoard.gameManager;
+            for (int i = 0; i < 4; i++)
+                canMovePiece.Add(false);
         }
 
         public async override void takeTurn()
@@ -120,14 +124,20 @@ namespace GameBoard
         {
             List<Piece> moveablePieces = new List<Piece>();
 
-            if (gameManager.Ludo.ControlPanel.piecebtnOne.Enabled)
-                moveablePieces.Add(pieces[0]);
-            if (gameManager.Ludo.ControlPanel.piecebtnTwo.Enabled)
-                moveablePieces.Add(pieces[1]);
-            if (gameManager.Ludo.ControlPanel.piecebtnThree.Enabled)
-                moveablePieces.Add(pieces[2]);
-            if (gameManager.Ludo.ControlPanel.piecebtnFour.Enabled)
-                moveablePieces.Add(pieces[3]);
+            for (int i = 0; i < 4; i++)
+            {
+                if (canMovePiece[i])
+                    moveablePieces.Add(pieces[i]);
+            }
+
+            //if (gameManager.Ludo.ControlPanel.piecebtnOne.Enabled)
+            //    moveablePieces.Add(pieces[0]);
+            //if (gameManager.Ludo.ControlPanel.piecebtnTwo.Enabled)
+            //    moveablePieces.Add(pieces[1]);
+            //if (gameManager.Ludo.ControlPanel.piecebtnThree.Enabled)
+            //    moveablePieces.Add(pieces[2]);
+            //if (gameManager.Ludo.ControlPanel.piecebtnFour.Enabled)
+            //    moveablePieces.Add(pieces[3]);
             
             return moveablePieces;
         }

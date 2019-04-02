@@ -63,7 +63,7 @@ namespace GameBoard
             gameDone = false;
 
             
-            players.Add(new Xela(1, Ludo));
+            players.Add(new HumanPlayer(1, Ludo));
             players.Add(new Xela(2, Ludo));
             players.Add(new Xela(3, Ludo));
             players.Add(new Xela(4, Ludo));
@@ -130,7 +130,8 @@ namespace GameBoard
 
             int randValue = seed.Next(4);
 
-            return players[randValue];
+            //return players[randValue];
+            return players[0];
         }
 
         public string currentPlayerString(AllPlayers player)
@@ -192,7 +193,7 @@ namespace GameBoard
 
                     turnCount++;
                     Ludo.ControlPanel.turnCount.Text = $"Turn: {turnCount}";
-
+                    
                     if (players[currentPlayer.team - 1] is Xela)
                         giveTurnToXela();
                 }
@@ -310,36 +311,47 @@ namespace GameBoard
         public void rollDice()
         {
             int unmovablePiecesAtHome = 0;
+            List<bool> canMovePiece = new List<bool>();
+            for (int i = 0; i < 4; i++)
+                canMovePiece.Add(true);
+
             diceRollsForCurrentPlayer++;
 
             diceValue = dice.Roll();
             Ludo.ControlPanel.dice.Image = Image.FromFile($"Images/Dice/Dice{diceValue}.png"); // Update dice image
 
             Ludo.ControlPanel.dicebtn.Enabled = false;
-            Ludo.ControlPanel.piecebtnOne.Enabled = true;
-            Ludo.ControlPanel.piecebtnTwo.Enabled = true;
-            Ludo.ControlPanel.piecebtnThree.Enabled = true;
-            Ludo.ControlPanel.piecebtnFour.Enabled = true;
+
+            if (currentPlayer is HumanPlayer)   // Enables buttons for humanplayer
+            {
+                foreach (Button btn in Ludo.ControlPanel.btnList)
+                    btn.Enabled = true;
+            }
+            else    // Disables buttons when Xela plays
+            {
+                foreach (Button btn in Ludo.ControlPanel.btnList)
+                    btn.Enabled = false;
+            }
 
             // Pieces in goal can't move
             if (currentPlayer.pieces[0].placement is goalField)
             {
-                Ludo.ControlPanel.piecebtnOne.Enabled = false;
+                canMovePiece[0] = false;
                 unmovablePiecesAtHome++;
             }
             if (currentPlayer.pieces[1].placement is goalField)
             {
-                Ludo.ControlPanel.piecebtnTwo.Enabled = false;
+                canMovePiece[1] = false;
                 unmovablePiecesAtHome++;
             }
             if (currentPlayer.pieces[2].placement is goalField)
             {
-                Ludo.ControlPanel.piecebtnThree.Enabled = false;
+                canMovePiece[2] = false;
                 unmovablePiecesAtHome++;
             }
             if (currentPlayer.pieces[3].placement is goalField)
             {
-                Ludo.ControlPanel.piecebtnFour.Enabled = false;
+                canMovePiece[3] = false;
                 unmovablePiecesAtHome++;
             }
             // Disables buttons for pieces that are at home, if the player didn't get a globus or 6
@@ -347,30 +359,45 @@ namespace GameBoard
             {
                 if (currentPlayer.pieces[0].placement is homeField)
                 {
-                    Ludo.ControlPanel.piecebtnOne.Enabled = false;
+                    canMovePiece[0] = false;
                     unmovablePiecesAtHome++;
                 }
                 if (currentPlayer.pieces[1].placement is homeField)
                 {
-                    Ludo.ControlPanel.piecebtnTwo.Enabled = false;
+                    canMovePiece[1] = false;
                     unmovablePiecesAtHome++;
                 }
                 if (currentPlayer.pieces[2].placement is homeField)
                 {
-                    Ludo.ControlPanel.piecebtnThree.Enabled = false;
+                    canMovePiece[2] = false;
                     unmovablePiecesAtHome++;
                 }
                 if (currentPlayer.pieces[3].placement is homeField)
                 {
-                    Ludo.ControlPanel.piecebtnFour.Enabled = false;
+                    canMovePiece[3] = false;
                     unmovablePiecesAtHome++;
                 }
             }
 
+            if (currentPlayer is Xela)
+            {
+                Xela currentXela = (Xela)currentPlayer;
+
+                for (int i = 0; i < 4; i++)
+                    currentXela.canMovePiece[i] = canMovePiece[i];
+            }
+            else
+            {
+                for (int i = 0; i < 4; i++)
+                    Ludo.ControlPanel.btnList[i].Enabled = canMovePiece[i];
+            }
+            
+
             // If the player has all pieces at home, then the player can roll the dice 3 times in total
             if (unmovablePiecesAtHome == 4 && diceRollsForCurrentPlayer <= 2)     
             {
-                Ludo.ControlPanel.dicebtn.Enabled = true;
+                if (currentPlayer is HumanPlayer)
+                    Ludo.ControlPanel.dicebtn.Enabled = true;
                 Ludo.ControlPanel.piecebtnOne.Enabled = false;
                 Ludo.ControlPanel.piecebtnTwo.Enabled = false;
                 Ludo.ControlPanel.piecebtnThree.Enabled = false;
@@ -390,6 +417,7 @@ namespace GameBoard
         private void giveTurnToXela()
         {
             //Console.WriteLine(turnCount + ": " + currentPlayer.team);
+            Ludo.ControlPanel.dicebtn.Enabled = false;
             players[currentPlayer.team - 1].takeTurn();
         }
     }

@@ -63,8 +63,8 @@ namespace GameBoard
             gameDone = false;
 
             
-            players.Add(new HumanPlayer(1, Ludo));
-            players.Add(new Xela(2, Ludo));
+            players.Add(new Xela(1, Ludo));
+            players.Add(new HumanPlayer(2, Ludo));
             players.Add(new Xela(3, Ludo));
             players.Add(new Xela(4, Ludo));
 
@@ -77,6 +77,9 @@ namespace GameBoard
             Ludo.ControlPanel.piecebtnThree.Enabled = false;
             Ludo.ControlPanel.piecebtnFour.Enabled = false;
             Ludo.ControlPanel.turnCount.Text = $"Turn: {turnCount}";
+
+            if (currentPlayer is Xela)
+                giveTurnToXela();
         }
 
         public void playGame()
@@ -333,49 +336,26 @@ namespace GameBoard
                     btn.Enabled = false;
             }
 
-            // Pieces in goal can't move
-            if (currentPlayer.pieces[0].placement is goalField)
+            // Finds the amount of unmovable pieces
+            for (int i = 0; i < 4; i++)
             {
-                canMovePiece[0] = false;
-                unmovablePiecesAtHome++;
+                if (currentPlayer.pieces[i].placement is goalField)
+                {
+                    canMovePiece[i] = false;
+                    unmovablePiecesAtHome++;
+                }
             }
-            if (currentPlayer.pieces[1].placement is goalField)
-            {
-                canMovePiece[1] = false;
-                unmovablePiecesAtHome++;
-            }
-            if (currentPlayer.pieces[2].placement is goalField)
-            {
-                canMovePiece[2] = false;
-                unmovablePiecesAtHome++;
-            }
-            if (currentPlayer.pieces[3].placement is goalField)
-            {
-                canMovePiece[3] = false;
-                unmovablePiecesAtHome++;
-            }
+            
             // Disables buttons for pieces that are at home, if the player didn't get a globus or 6
             if ((diceValue == 5 || diceValue == 6) == false)
             {
-                if (currentPlayer.pieces[0].placement is homeField)
+                for (int i = 0; i < 4; i++)
                 {
-                    canMovePiece[0] = false;
-                    unmovablePiecesAtHome++;
-                }
-                if (currentPlayer.pieces[1].placement is homeField)
-                {
-                    canMovePiece[1] = false;
-                    unmovablePiecesAtHome++;
-                }
-                if (currentPlayer.pieces[2].placement is homeField)
-                {
-                    canMovePiece[2] = false;
-                    unmovablePiecesAtHome++;
-                }
-                if (currentPlayer.pieces[3].placement is homeField)
-                {
-                    canMovePiece[3] = false;
-                    unmovablePiecesAtHome++;
+                    if (currentPlayer.pieces[i].placement is homeField)
+                    {
+                        canMovePiece[i] = false;
+                        unmovablePiecesAtHome++;
+                    }
                 }
             }
 
@@ -394,14 +374,12 @@ namespace GameBoard
             
 
             // If the player has all pieces at home, then the player can roll the dice 3 times in total
-            if (unmovablePiecesAtHome == 4 && diceRollsForCurrentPlayer <= 2)     
+            if (unmovablePiecesAtHome == 4 && diceRollsForCurrentPlayer < 3)     
             {
                 if (currentPlayer is HumanPlayer)
                     Ludo.ControlPanel.dicebtn.Enabled = true;
-                Ludo.ControlPanel.piecebtnOne.Enabled = false;
-                Ludo.ControlPanel.piecebtnTwo.Enabled = false;
-                Ludo.ControlPanel.piecebtnThree.Enabled = false;
-                Ludo.ControlPanel.piecebtnFour.Enabled = false;
+                for (int i = 0; i < 4; i++)
+                    Ludo.ControlPanel.btnList[i].Enabled = false;
             }
             else if (diceValue == 5)  // If the player got a globus it gets an extra turn
             {

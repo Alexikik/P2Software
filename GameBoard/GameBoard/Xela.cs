@@ -26,13 +26,20 @@ namespace GameBoard
         {
             await Task.Delay(1 * 1000);
 
-            Console.WriteLine("\n" + gameManager.turnCount + $": Helo c: [{gameManager.currentPlayerString(this)}]");
+            if (gameManager.diceRollsForCurrentPlayer == 0)
+                Console.WriteLine("\n" + gameManager.turnCount + $": Helo c: [{gameManager.currentPlayerString(gameManager.currentPlayer)}]");
             bool notDone = true;
             int bestPieceToMove;
 
             while (notDone)
             {
                 gameManager.rollDice();
+                // If the player has all it's pieces at home it gets 3 tries in total
+                while (moveablePieces().Count == 0 && gameManager.diceRollsForCurrentPlayer < 3)
+                {
+                    Console.WriteLine($"    Dice: [{gameManager.diceValue}] Piece: n/a DiceRolls: {gameManager.diceRollsForCurrentPlayer}");
+                    gameManager.rollDice();
+                }
 
                 if (gameManager.currentPlayer.team != team)
                     notDone = false;
@@ -40,8 +47,8 @@ namespace GameBoard
                 {
                     bestPieceToMove = calculateBestMove() + 1;  // Finds best move
 
-                    Console.WriteLine($"[{gameManager.turnCount}] {gameManager.currentPlayerString(gameManager.currentPlayer)} \n" +
-                        $"    Dice: [{gameManager.diceValue}] Piece: {bestPieceToMove}");   // Prints best move
+                    Console.WriteLine($"    {gameManager.currentPlayerString(gameManager.currentPlayer)} \n" +
+                        $"    Dice: [{gameManager.diceValue}] Piece: {bestPieceToMove} DiceRolls: {gameManager.diceRollsForCurrentPlayer}");   // Prints best move
 
                     gameManager.turnEnd(bestPieceToMove);   // Does best move
 
@@ -129,15 +136,6 @@ namespace GameBoard
                 if (canMovePiece[i])
                     moveablePieces.Add(pieces[i]);
             }
-
-            //if (gameManager.Ludo.ControlPanel.piecebtnOne.Enabled)
-            //    moveablePieces.Add(pieces[0]);
-            //if (gameManager.Ludo.ControlPanel.piecebtnTwo.Enabled)
-            //    moveablePieces.Add(pieces[1]);
-            //if (gameManager.Ludo.ControlPanel.piecebtnThree.Enabled)
-            //    moveablePieces.Add(pieces[2]);
-            //if (gameManager.Ludo.ControlPanel.piecebtnFour.Enabled)
-            //    moveablePieces.Add(pieces[3]);
             
             return moveablePieces;
         }

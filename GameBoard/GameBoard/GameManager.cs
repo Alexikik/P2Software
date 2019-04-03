@@ -21,10 +21,12 @@ namespace GameBoard
         public int turnCount;
         public bool gameDone;
 
-        public GameManager()
+        public GameManager(int state)
         {
-            //setupGame();
-            setupGameWithXela();
+            if (state == 0)
+                setupGame();
+            if (state == 1)
+                setupGameWithXela();
         }
 
 

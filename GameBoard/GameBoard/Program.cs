@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace GameBoard
         [STAThread]
         static void Main(string[] args)
         {
-            GameManager LudoManager = new GameManager();
+            GameManager LudoManager = new GameManager(1);
             LudoManager.playGame();
         }
     }

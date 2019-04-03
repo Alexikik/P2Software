@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,11 +29,30 @@ namespace GameBoard
             this.Location = coordinates;
             this.gameManager = gameManagerX;
 
+            //string filename = @"C:DiceBlank.png";
+            //FileInfo fileInfo = new FileInfo(filename);
+            //string directoryFullPath = fileInfo.DirectoryName; // contains "C:\MyDirectory"
+            //Console.WriteLine(directoryFullPath);
+            //dice.Image = Image.FromFile(directoryFullPath + @"\Images\Dice\DiceBlank.png");
+
+            string filename = @"C:DiceBlank.png";
+            FileInfo fileInfo = new FileInfo(filename);
+            string directoryFullPath = fileInfo.DirectoryName; // contains "C:\MyDirectory"
+            Console.WriteLine(directoryFullPath);
+            
+
             dice = new PictureBox();
             dice.SizeMode = PictureBoxSizeMode.StretchImage;
-            dice.Image = Image.FromFile("Images/Dice/DiceBlank.png");
+            Console.WriteLine(directoryFullPath + @"\Images\Dice\DiceBlank.png");
+            dice.Image = Image.FromFile(directoryFullPath + @"\Images\Dice\DiceBlank.png");
             dice.Size = new Size(120, 120);
             dice.Location = new Point(20, 20);
+
+            //dice = new PictureBox();
+            //dice.SizeMode = PictureBoxSizeMode.StretchImage;
+            //dice.Image = Image.FromFile("Images/Dice/DiceBlank.png");
+            //dice.Size = new Size(120, 120);
+            //dice.Location = new Point(20, 20);
 
             dicebtn = new Button();
             dicebtn.Size = new Size(60, dice.Height);

@@ -54,5 +54,23 @@ namespace GameBoardTest
             globeField globeField = new globeField(0, 0, 0);
             Assert.IsInstanceOfType(gameManager.players[1].pieces[0].placement, globeField.GetType());
         }
+
+        [TestMethod]
+        public void jumpOnStar()
+        {
+            //Arrange:
+            GameManager gameManager = new GameManager(0);
+            gameManager.players[0].pieces[0].newField(gameManager.Ludo.boardFields[0]);
+            gameManager.currentPlayer = gameManager.players[0];
+
+            //Act:
+            gameManager.diceValue = 6;
+            gameManager.turnEnd(1);
+
+            // Assert:
+            Assert.AreEqual(12, gameManager.players[0].pieces[0].placement.index);
+            starField homeField = new starField(0, 0, 0);
+            Assert.IsInstanceOfType(gameManager.players[0].pieces[0].placement, homeField.GetType());
+        }
     }
 }

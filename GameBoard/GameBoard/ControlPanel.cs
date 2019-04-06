@@ -39,12 +39,13 @@ namespace GameBoard
             FileInfo fileInfo = new FileInfo(filename);
             string directoryFullPath = fileInfo.DirectoryName; // contains "C:\MyDirectory"
             Console.WriteLine(directoryFullPath);
-            
+
 
             dice = new PictureBox();
             dice.SizeMode = PictureBoxSizeMode.StretchImage;
             Console.WriteLine(directoryFullPath + @"\Images\Dice\DiceBlank.png");
-            dice.Image = Image.FromFile(directoryFullPath + @"\Images\Dice\DiceBlank.png");
+            //dice.Image = Image.FromFile(directoryFullPath + @"\Images\Dice\DiceBlank.png");
+            dice.Image = Image.FromFile("Images/Dice/DiceBlank.png");
             dice.Size = new Size(120, 120);
             dice.Location = new Point(20, 20);
 

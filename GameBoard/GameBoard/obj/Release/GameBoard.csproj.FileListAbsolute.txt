@@ -1,0 +1,7 @@
+C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\GameBoard\bin\Release\GameBoard.exe.config
+C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\GameBoard\bin\Release\GameBoard.exe
+C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\GameBoard\bin\Release\GameBoard.pdb
+C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\GameBoard\obj\Release\GameBoard.csprojAssemblyReference.cache
+C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\GameBoard\obj\Release\GameBoard.csproj.CoreCompileInputs.cache
+C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\GameBoard\obj\Release\GameBoard.exe
+C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\GameBoard\obj\Release\GameBoard.pdb

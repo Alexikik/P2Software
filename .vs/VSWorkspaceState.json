@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\GameBoard",
+    "\\GameBoard\\GameBoard",
+    "\\GameBoard\\GameBoardTest",
+    "\\GameBoard\\packages"
+  ],
+  "SelectedNode": "\\GameBoard\\GameBoardTest\\packages.config",
+  "PreviewInSolutionExplorer": false
+}

@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LudoRulesTest.cs" />
+    <Compile Include="RollDiceTest.cs" />
     <Compile Include="TurnEndTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

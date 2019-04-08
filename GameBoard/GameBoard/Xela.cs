@@ -26,9 +26,8 @@ namespace GameBoard
         }
 
 
-        public async override void takeTurn()
+        public override void takeTurn()
         {
-            await Task.Delay(1 * 10);
 
             if (gameManager.diceRollsForCurrentPlayer == 0)
                 Console.WriteLine("\n" + gameManager.turnCount + $": Hello c: [{gameManager.currentPlayerString(gameManager.currentPlayer)}]");
@@ -113,7 +112,7 @@ namespace GameBoard
         private int calculateBestMove()
         {
             int bestPieceToMove = 0;
-            float score = float.MinValue;
+            double score = float.MinValue;
             List<Piece> moveablePiecesList = moveablePieces();
 
             if (moveablePiecesList.Count == 0)
@@ -131,7 +130,7 @@ namespace GameBoard
             return bestPieceToMove;
         }
 
-        private float GetScore(Piece p)
+        private double GetScore(Piece p)
         {
             allFields field;
             int moves = gameManager.diceValue;
@@ -146,87 +145,21 @@ namespace GameBoard
             switch(myBehavior)
             {
                 case Behavior.Aggresive:
-                    return BehaviorWeight(p, field, 1, 4, 3, 0, 2);
+                    return BehaviorWeight(p, field, 0, 0, 5, 0, 0);
                 case Behavior.Passive:
-                    return BehaviorWeight(p, field, 3, 0, 2, 1, 4);
+                    return BehaviorWeight(p, field, 0, 0, 0, 0, 0);
                 case Behavior.Tactical:
                     return BehaviorWeight(p, field, 20, 0, 0, 0, 100);
-
             }
 
             return 1;
         }
 
-        float BehaviorWeight(Piece p, allFields f, float getOutWeight, float killWeight, float starWeight, float groupWeight, float evadeWeight)
+        double BehaviorWeight(Piece p, allFields f, double getOutWeight, double killWeight, double starWeight, double groupWeight, double evadeWeight)
         {
 
-            float value = 0;
-
-            if (gameManager.Ludo.findPiecesAtField(f).Count > 0)
-            {
-                if (gameManager.Ludo.findPiecesAtField(f)[0].player.team != team)
-                {
-                    if (gameManager.Ludo.findPiecesAtField(f).Count > 1)
-                    {
-                        value = value + (killWeight * 0);
-                    }
-                    else
-                    {
-                        value = value + (killWeight * 1); //Insert lenght calculation here?
-                    }
-                }
-                else
-                {
-                    value = groupWeight * 1;
-                }
-            }
-
-            if(f is starField)
-            {
-                if (gameManager.Ludo.boardFields[gameManager.Ludo.findNextStar(p, gameManager.diceValue, true)].team != team)
-                    value = value + (killWeight * 1);
-                else
-                    value = value + (starWeight * 1);
-            }
-
-            if (f is globeField)
-            {
-                if (gameManager.Ludo.findPiecesAtField(f).Count > 0)
-                {
-                    if (gameManager.Ludo.findPiecesAtField(f)[0].player.team != team)
-                        value = -1;
-                    else
-                        value = value + (groupWeight * 1);
-                }
-                else
-                    value = value + (evadeWeight * 1);
-            }
-
-            if (p.placement is starField)
-            {
-                if (!ChaseChecker(p, gameManager.Ludo.findNextStar(p, 0, false), 6))
-                    value = value + (evadeWeight * 1);
-                else
-                    value = value + (evadeWeight * -1);
-            }
-
-            if(p.placement is homeField && (gameManager.diceValue == 5 || gameManager.diceValue == 6))
-            {
-                value = value + (getOutWeight * 1);
-            }
-
-            if (ChaseChecker(p, f.index, 6))
-            {
-                value = value + (evadeWeight * -1); //Dont value this field if anyone is behind
-            }
-            else
-                value = value + (evadeWeight * 0);
-            if(ChaseChecker(p, p.placement.index, 6))
-            {
-                value = value + (evadeWeight * 1);
-            }
-            
-
+            double value = 1;
+ 
             return value;
 
         }

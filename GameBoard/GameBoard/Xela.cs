@@ -158,9 +158,14 @@ namespace GameBoard
         double BehaviorWeight(Piece p, allFields f, double getOutWeight, double killWeight, double starWeight, double groupWeight, double evadeWeight)
         {
 
-            double value = 1;
- 
-            return value;
+            double points = 1;
+
+            if(f.index > gameManager.Ludo.boardFields.Count)
+            {
+                points = p.placement.index;
+            }
+
+            return points;
 
         }
 

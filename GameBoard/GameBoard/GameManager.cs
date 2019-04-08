@@ -20,11 +20,22 @@ namespace GameBoard
         public bool turnDone;
         public int turnCount;
         public bool gameDone;
+        public bool endScreenShown;
+        bool noMessageBox { get; }
         public bool writeToFile = true;
 
 
-        public GameManager(int state)
+        public GameManager(int state, bool noMessageBox)
         {
+            Ludo = new GameBoard(players, this);
+            dice = new Dice();
+            turnCount = 1;
+            diceRollsForCurrentPlayer = 0;
+            currentPlayerExtraTurn = false;
+            gameDone = false;
+            endScreenShown = false;
+            this.noMessageBox = noMessageBox;
+
             if (state == 0)
                 setupGame();
             if (state == 1)
@@ -34,13 +45,6 @@ namespace GameBoard
 
         private void setupGame()
         {
-            Ludo = new GameBoard(players, this);
-            dice = new Dice();
-            turnCount = 1;
-            diceRollsForCurrentPlayer = 0;
-            currentPlayerExtraTurn = false;
-            gameDone = false;
-
             for (int i = 0; i < 4; i++)
             {
                 players.Add(new HumanPlayer(i + 1, Ludo));
@@ -59,14 +63,6 @@ namespace GameBoard
 
         private void setupGameWithXela()
         {
-            Ludo = new GameBoard(players, this);
-            dice = new Dice();
-            turnCount = 1;
-            diceRollsForCurrentPlayer = 0;
-            currentPlayerExtraTurn = false;
-            gameDone = false;
-
-            
             players.Add(new Xela(1, Ludo, Xela.Behavior.Passive));
             players.Add(new Xela(2, Ludo, Xela.Behavior.Passive));
             players.Add(new Xela(3, Ludo, Xela.Behavior.Passive));
@@ -129,6 +125,8 @@ namespace GameBoard
             #endregion This region is used for testing
 
             Application.Run(Ludo);
+            Ludo.Close();
+            //Application.Exit();
         }
 
         private AllPlayers chooseStartingPlayer()
@@ -206,6 +204,7 @@ namespace GameBoard
                 }
                 else    // If the game is done (All players have gotten their pieces into goal)
                 {
+                    endScreenShown = true;
                     diceRollsForCurrentPlayer = 0;
                     currentPlayerExtraTurn = false;
                     
@@ -216,7 +215,9 @@ namespace GameBoard
                     Ludo.ControlPanel.piecebtnFour.Enabled = false;
                     Ludo.ControlPanel.dice.Image = Image.FromFile("Images/Dice/DiceBlank.png");
                     
-                    MessageBox.Show(getGameEndText());
+                    if (!noMessageBox)
+                        MessageBox.Show(getGameEndText());
+                    Ludo.Close();   // Closes the ludo screen, after pressing OK to the messageBox
                 }
             }
         }

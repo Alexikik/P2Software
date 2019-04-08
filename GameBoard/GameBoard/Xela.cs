@@ -28,14 +28,14 @@ namespace GameBoard
 
         public async override void takeTurn()
         {
-            await Task.Delay(1 * 10);
+            await Task.Delay(1 * 1);
 
             if (gameManager.diceRollsForCurrentPlayer == 0)
                 Console.WriteLine("\n" + gameManager.turnCount + $": Hello c: [{gameManager.currentPlayerString(gameManager.currentPlayer)}]");
             bool notDone = true;
             int bestPieceToMove;
 
-            while (notDone)
+            while (notDone && !gameManager.gameDone)
             {
                 gameManager.rollDice();
                 // If the player has all it's pieces at home it gets 3 tries in total

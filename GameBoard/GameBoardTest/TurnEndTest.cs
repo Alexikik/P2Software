@@ -47,21 +47,6 @@ namespace GameBoardTest
         }
 
         [TestMethod]
-        public void TurnEndDiceValue1()
-        {
-            //Arrange:
-            GameManager gameManager = new GameManager(0);
-            gameManager.players[0].pieces[0].newField(gameManager.Ludo.boardFields[2]);
-
-            //Act:
-            gameManager.diceValue = 1;
-            gameManager.turnEnd(1);
-
-            // Assert:
-            Assert.AreEqual(3, gameManager.players[0].pieces[0].placement.index);
-        }
-
-        [TestMethod]
         public void diceValu3Test()
         {
             //Arrange:
@@ -89,6 +74,38 @@ namespace GameBoardTest
 
             // Assert:
             Assert.AreEqual(1, gameManager.players[0].pieces[0].placement.index);
+        }
+
+        [TestMethod]
+        public void TurnEndGlobusOverEnd()
+        {
+            //Arrange:
+            GameManager gameManager = new GameManager(0);
+            gameManager.players[1].pieces[0].newField(gameManager.Ludo.boardFields[48]);    // Second last field in boardFields 
+            gameManager.currentPlayer = gameManager.players[1];
+
+            //Act:
+            gameManager.diceValue = 5;
+            gameManager.turnEnd(1);
+
+            // Assert:
+            Assert.AreEqual(1, gameManager.players[1].pieces[0].placement.index);   // First globus is boardFields[1]
+        }
+
+        [TestMethod]
+        public void TurnEndStarOverEnd()
+        {
+            //Arrange:
+            GameManager gameManager = new GameManager(0);
+            gameManager.players[1].pieces[0].newField(gameManager.Ludo.boardFields[48]);    // Second last field in boardFields
+            gameManager.currentPlayer = gameManager.players[1];
+
+            //Act:
+            gameManager.diceValue = 3;
+            gameManager.turnEnd(1);
+
+            // Assert:
+            Assert.AreEqual(6, gameManager.players[1].pieces[0].placement.index);   // First star is boardFields[6]
         }
     }
 }

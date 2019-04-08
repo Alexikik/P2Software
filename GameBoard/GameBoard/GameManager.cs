@@ -67,7 +67,7 @@ namespace GameBoard
             gameDone = false;
 
             
-            players.Add(new HumanPlayer(1, Ludo));
+            players.Add(new Xela(1, Ludo, Xela.Behavior.Passive));
             players.Add(new Xela(2, Ludo, Xela.Behavior.Passive));
             players.Add(new Xela(3, Ludo, Xela.Behavior.Passive));
             players.Add(new Xela(4, Ludo, Xela.Behavior.Aggresive));

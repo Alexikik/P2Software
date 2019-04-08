@@ -26,8 +26,9 @@ namespace GameBoard
         }
 
 
-        public override void takeTurn()
+        public async override void takeTurn()
         {
+            await Task.Delay(1 * 10);
 
             if (gameManager.diceRollsForCurrentPlayer == 0)
                 Console.WriteLine("\n" + gameManager.turnCount + $": Hello c: [{gameManager.currentPlayerString(gameManager.currentPlayer)}]");

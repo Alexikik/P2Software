@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 
 namespace GameBoard
 {
@@ -779,13 +778,13 @@ namespace GameBoard
             }
 
             p.player.piecesInGoal++;
-            if (p.player.piecesInGoal == 4)
-            {
-                    using (StreamWriter writer = new StreamWriter("C:\\Users\\Bruger\\Scores.txt", true))
-                    {
-                        writer.WriteLine(gameManager.currentPlayerString(p.player) + "Finished in: " + gameManager.turnCount);
-                    }
-            }
+            //if (p.player.piecesInGoal == 4)
+            //{
+            //        using (StreamWriter writer = new StreamWriter("C:\\Users\\Bruger\\Scores.txt", true))
+            //        {
+            //            writer.WriteLine(gameManager.currentPlayerString(p.player) + "Finished in: " + gameManager.turnCount);
+            //        }
+            //}
             resetSizeBeforeMove(p, goalFields[p.number]);
             p.picture.Size = new Size(34, 34);
 

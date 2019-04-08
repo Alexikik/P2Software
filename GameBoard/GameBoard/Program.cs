@@ -15,7 +15,7 @@ namespace GameBoard
         static void Main(string[] args)
         {
             GameManager LudoManager = new GameManager();
-            LudoManager.playGame();
+            LudoManager.playGame();             
         }
     }
 }

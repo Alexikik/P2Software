@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace GameBoard
 {
@@ -219,7 +220,7 @@ namespace GameBoard
                     moveXfields(p, moves);
                     break;
                 case 3:
-                    int nextStarIndex = findNextStar(p, 0) - p.placement.index; 
+                    int nextStarIndex = findNextStar(p, 0, true) - p.placement.index; 
                     moveToNextStar(p, nextStarIndex);
                     break;
                 case 5:
@@ -313,28 +314,51 @@ namespace GameBoard
 
         private void moveToNextStar(Piece p, int moves)
         {
-            int index = findNextStar(p, moves);
+            int index = findNextStar(p, moves, true);
             checkIfGoOnPath(p, boardFields[index]);
         }
         
-        public int findNextStar(Piece p, int moves)
+        public int findNextStar(Piece p, int moves, bool forward)
         {
-            int index = p.placement.index + moves + 1;      // +1 so it doesn't "find" the star it's already on
+            int index = 0;
             bool notFound = true;
-
-            while (notFound)
+            if (forward)
             {
-                if (index >= boardFields.Count)
-                    index = 0;
-                else
+                index = p.placement.index + moves + 1;      // +1 so it doesn't "find" the star it's already on
+
+                while (notFound)
                 {
-                    if (boardFields[index] is starField)
-                        notFound = false;
+                    if (index >= boardFields.Count)
+                        index = 0;
                     else
-                        index++;
+                    {
+                        if (boardFields[index] is starField)
+                            notFound = false;
+                        else
+                            index++;
+                    }
                 }
+                return index;
             }
-            return index;
+            else
+            {
+                index = p.placement.index -1;      // -1 so it doesn't "find" the star it's already on will search backwards here
+
+                while (notFound)
+                {
+                    if (index < 0)
+                        index = boardFields.Count + index;
+                    else
+                    {
+                        if (boardFields[index] is starField)
+                            notFound = false;
+                        else
+                            index--;
+                    }
+                }
+                return index;
+            }
+            
         }
 
         private void returnOtherPlayerHome(Piece p, allFields newPlacement)
@@ -724,6 +748,13 @@ namespace GameBoard
             }
 
             p.player.piecesInGoal++;
+            if (p.player.piecesInGoal == 4)
+            {
+                    using (StreamWriter writer = new StreamWriter("C:\\Users\\Bruger\\Scores.txt", true))
+                    {
+                        writer.WriteLine(gameManager.currentPlayerString(p.player) + "Finished in: " + gameManager.turnCount);
+                    }
+            }
             resetSizeBeforeMove(p, goalFields[p.number]);
             p.picture.Size = new Size(34, 34);
 

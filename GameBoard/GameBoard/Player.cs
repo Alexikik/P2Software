@@ -53,4 +53,5 @@ namespace GameBoard
         public override void takeTurn()
         { }
     }
+
 }

@@ -20,6 +20,8 @@ namespace GameBoard
         public bool turnDone;
         public int turnCount;
         public bool gameDone;
+        public bool writeToFile = true;
+
 
         public GameManager()
         {
@@ -63,10 +65,10 @@ namespace GameBoard
             gameDone = false;
 
             
-            players.Add(new Xela(1, Ludo));
-            players.Add(new HumanPlayer(2, Ludo));
-            players.Add(new Xela(3, Ludo));
-            players.Add(new Xela(4, Ludo));
+            players.Add(new Xela(1, Ludo, Xela.Behavior.Aggresive));
+            players.Add(new Xela(2, Ludo, Xela.Behavior.Passive));
+            players.Add(new Xela(3, Ludo, Xela.Behavior.Passive));
+            players.Add(new Xela(4, Ludo, Xela.Behavior.Passive));
 
             Ludo.SetupControls();
 
@@ -274,11 +276,13 @@ namespace GameBoard
             }
 
             text = $"The game is done! \n" +
-                $"Congratulations to player {currentPlayerString(p1)} for winning! \n" +
+                $"Congratulations to player {currentPlayerString(p1)} for winning! With Behavior:  \n" +
                 $"Player {currentPlayerString(p2)} got second place \n" +
                 $"Player {currentPlayerString(p3)} got third place \n" +
                 $"Player {currentPlayerString(p4)} got fourth place \n \n" +
                 $"Thanks for playing!";
+
+            
 
             Ludo.ControlPanel.currentPlaytxt.Text = currentPlayerString(p1);    // Sets display to winning player
 

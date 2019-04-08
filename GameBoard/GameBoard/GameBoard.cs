@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;    // Used for getting string filepaths
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -42,7 +43,20 @@ namespace GameBoard
             // Ludo image
             gameBoard = new PictureBox();
             gameBoard.SizeMode = PictureBoxSizeMode.StretchImage;    // Streches the image
-            gameBoard.Image = Image.FromFile("Images/LudoPlade.png");
+            //gameBoard.Image = Image.FromFile("Images/LudoPlade.png");
+            // gameBoard.Image = Image
+            //string filename = "GameBoard";
+            //gameBoard.Image = Image.FromFile($"{Path.GetDirectoryName(@"Images/LudoPlade")}.png");
+
+            //string filename = "GameBoard";
+            //Console.WriteLine("String: " + Path.GetDirectoryName(filename));
+            //gameBoard.Image = Image.FromFile($"{Path.GetDirectoryName(filename}.png");
+            string filename = @"C:LudoPlade.png";
+            FileInfo fileInfo = new FileInfo(filename);
+            string directoryFullPath = fileInfo.DirectoryName; // contains "C:\MyDirectory"
+            Console.WriteLine(directoryFullPath);
+            gameBoard.Image = Image.FromFile(directoryFullPath + @"\Images\LudoPlade.png");
+
             gameBoard.Size = new Size(765, 765);
         }
         
@@ -394,7 +408,7 @@ namespace GameBoard
                     {
                         resetSizeBeforeMove(p, newPlacement);
 
-                        // Sets size and location of piece already on piece
+                        // Sets size and location of piece already on field
                         piecesAtField[0].picture.Size = new Size(15, 15);
                         piecesAtField[0].picture.Location = new Point(piecesAtField[0].picture.Location.X - 4, piecesAtField[0].picture.Location.Y + 5);
 

@@ -23,10 +23,12 @@ namespace GameBoard
         public bool writeToFile = true;
 
 
-        public GameManager()
+        public GameManager(int state)
         {
-            //setupGame();
-            setupGameWithXela();
+            if (state == 0)
+                setupGame();
+            if (state == 1)
+                setupGameWithXela();
         }
 
 

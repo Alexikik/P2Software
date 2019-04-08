@@ -235,6 +235,23 @@ namespace GameBoard
             }
         }
 
+        public int GetHomeField(AllPlayers player)
+        {
+            switch (player.team)
+            {
+                case 1:
+                    return 1;
+                case 2:
+                    return 14;
+                case 3:
+                    return 27;
+                case 4:
+                    return 40;
+                default:
+                    return 0;
+            }
+        }
+
         private int checkIfHomefield(Piece p)
         {
             if (p.placement is homeField)

@@ -1,0 +1,16 @@
+C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\0\b\GameBoardTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\0\b\GameBoardTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\0\b\GameBoardTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\0\b\GameBoardTest\bin\Debug\GameBoardTest.dll
+C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\0\i\GameBoardTest\Debug\GameBoardTest.csprojAssemblyReference.cache
+C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\0\i\GameBoardTest\Debug\GameBoardTest.csproj.CoreCompileInputs.cache
+C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\0\i\GameBoardTest\Debug\GameBoardTest.csproj.CopyComplete
+C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\0\i\GameBoardTest\Debug\GameBoardTest.dll
+C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\99768\b\GameBoardTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\99768\b\GameBoardTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\99768\b\GameBoardTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\99768\b\GameBoardTest\bin\Debug\GameBoardTest.dll
+C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\99768\i\GameBoardTest\Debug\GameBoardTest.csprojAssemblyReference.cache
+C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\99768\i\GameBoardTest\Debug\GameBoardTest.csproj.CoreCompileInputs.cache
+C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\99768\i\GameBoardTest\Debug\GameBoardTest.csproj.CopyComplete
+C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\99768\i\GameBoardTest\Debug\GameBoardTest.dll

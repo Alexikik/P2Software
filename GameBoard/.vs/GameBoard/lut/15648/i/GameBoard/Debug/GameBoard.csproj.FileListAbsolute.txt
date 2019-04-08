@@ -1,6 +1,0 @@
-C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\15648\b\GameBoard\bin\Debug\GameBoard.exe.config
-C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\15648\b\GameBoard\bin\Debug\GameBoard.exe
-C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\15648\i\GameBoard\Debug\GameBoard.csprojAssemblyReference.cache
-C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\15648\i\GameBoard\Debug\GameBoard.csproj.CoreCompileInputs.cache
-C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\15648\i\GameBoard\Debug\GameBoard.csproj.CopyComplete
-C:\Users\Alex\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\15648\i\GameBoard\Debug\GameBoard.exe

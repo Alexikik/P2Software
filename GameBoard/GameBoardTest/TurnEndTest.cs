@@ -52,6 +52,7 @@ namespace GameBoardTest
             //Arrange:
             GameManager gameManager = new GameManager(0, true);
             gameManager.players[0].pieces[0].newField(gameManager.Ludo.boardFields[0]);
+            gameManager.currentPlayer = gameManager.players[0];
 
             //Act:
             gameManager.diceValue = 3;
@@ -67,6 +68,7 @@ namespace GameBoardTest
             //Arrange:
             GameManager gameManager = new GameManager(0, true);
             gameManager.players[0].pieces[0].newField(gameManager.Ludo.boardFields[0]);
+            gameManager.currentPlayer = gameManager.players[0];
 
             //Act:
             gameManager.diceValue = 5;

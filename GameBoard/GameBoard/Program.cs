@@ -20,7 +20,7 @@ namespace GameBoard
             for (int i = 1; i <= 3; i++)    // i amount of games will be played
             {
                 // Change this to true, if you want more games to be played!
-                GameManager LudoManager = new GameManager(1, false);    // Change this to true, if you want more games to be played!
+                GameManager LudoManager = new GameManager(1, true);    // Change this to true, if you want more games to be played!
                 // Change this to true, if you want more games to be played!
                 LudoManager.playGame();
 

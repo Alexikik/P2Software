@@ -20,7 +20,7 @@ namespace GameBoard
         public GameManager gameManager;
         public Label turnCount;
         public Label currentPlaytxt;
-        public List<Button> btnList;
+        public List<Button> btnList { get; }
 
         public ControlPanel(Point coordinates, GameManager gameManagerX)
         {
@@ -196,6 +196,26 @@ namespace GameBoard
         private void PiecebtnFour_Click(object sender, EventArgs e)
         {
             gameManager.turnEnd(4);
+        }
+
+        public void disableAllButtons()
+        {
+            dicebtn.Enabled = false;
+            foreach (Button btn in btnList)
+                btn.Enabled = false;
+        }
+
+        public void disableButtonsEnableDice()
+        {
+            dicebtn.Enabled = true;
+            foreach (Button btn in btnList)
+                btn.Enabled = false;
+        }
+
+        public void enableOrDisablePieceButtons(bool state)
+        {
+            foreach (Button btn in btnList)
+                btn.Enabled = state;
         }
     }
 }

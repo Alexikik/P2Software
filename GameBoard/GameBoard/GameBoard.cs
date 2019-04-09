@@ -408,12 +408,10 @@ namespace GameBoard
                         resetSizeBeforeMove(p, newPlacement);
 
                         // Sets size and location of piece already on field
-                        piecesAtField[0].picture.Size = new Size(15, 15);
-                        piecesAtField[0].picture.Location = new Point(piecesAtField[0].picture.Location.X - 4, piecesAtField[0].picture.Location.Y + 5);
+                        piecesAtField[0].setSizeAndLocation(15, -4, 5, true);
 
                         // Sets size and location of new piece 
-                        p.picture.Size = new Size(15, 15);
-                        p.picture.Location = new Point(piecesAtField[0].picture.Location.X + 19, piecesAtField[0].picture.Location.Y);
+                        p.setSizeAndLocation(15, piecesAtField[0].picture.Location.X + 19, piecesAtField[0].picture.Location.Y, false);
                     }
                     else    // If the two pieces are on different teams
                     {
@@ -452,8 +450,7 @@ namespace GameBoard
                         pRight.picture.Location = new Point(pRight.picture.Location.X, pRight.picture.Location.Y - 9);
 
                         // Sets size and location for new piece at field
-                        p.picture.Size = new Size(15, 15);
-                        p.picture.Location = new Point(pLeft.picture.Location.X + 9, pLeft.picture.Location.Y + 19);
+                        p.setSizeAndLocation(15, pLeft.picture.Location.X + 9, pLeft.picture.Location.Y + 19, false);
                     }
                     else  // If not on the same team
                         movePieceHome(p);   // Moves current player home
@@ -497,8 +494,7 @@ namespace GameBoard
                         pBottomL.picture.Location = new Point(pLeft.picture.Location.X, pBottomL.picture.Location.Y);
 
                         // Sets size and location for new piece at field
-                        p.picture.Size = new Size(15, 15);
-                        p.picture.Location = new Point(pLeft.picture.Location.X + 19, pBottomL.picture.Location.Y);
+                        p.setSizeAndLocation(15, pLeft.picture.Location.X + 19, pBottomL.picture.Location.Y, false);
                     }
                     else  // If not on the same team
                         movePieceHome(p);   // Moves current player home
@@ -559,17 +555,16 @@ namespace GameBoard
             switch (piecesAtField.Count)    
             {
                 case 1:
-                    piecesAtField[0].picture.Size = new Size(26, 26);
-                    piecesAtField[0].picture.Location = new Point(piecesAtField[0].placement.x, piecesAtField[0].placement.y);
+                    piecesAtField[0].setSizeAndLocation(26, 0, 0, true);
                     break;
                 case 2:     // Set size acording to two pieces at field
-                    piecesAtField[0].picture.Location = new Point(piecesAtField[0].placement.x - 4, piecesAtField[0].placement.y + 5);
-                    piecesAtField[1].picture.Location = new Point(piecesAtField[0].picture.Location.X + 19, piecesAtField[0].picture.Location.Y);
+                    piecesAtField[0].setLocationDxDy(-4, 5);
+                    piecesAtField[1].setLocation(piecesAtField[0].picture.Location.X + 19, piecesAtField[0].picture.Location.Y);
                     break;
                 case 3:     // Set size acording to three pieces at field
-                    piecesAtField[0].picture.Location = new Point(piecesAtField[0].placement.x - 4, piecesAtField[0].placement.y + 5 - 9);
-                    piecesAtField[1].picture.Location = new Point(piecesAtField[0].picture.Location.X + 19, piecesAtField[0].picture.Location.Y);
-                    piecesAtField[2].picture.Location = new Point(piecesAtField[0].picture.Location.X + 9, piecesAtField[0].picture.Location.Y + 19);
+                    piecesAtField[0].setLocationDxDy(-4, 5 - 9);
+                    piecesAtField[1].setLocation(piecesAtField[0].picture.Location.X + 19, piecesAtField[0].picture.Location.Y);
+                    piecesAtField[2].setLocation(piecesAtField[0].picture.Location.X + 9, piecesAtField[0].picture.Location.Y + 19);
                     break;
                 default:
                     break;

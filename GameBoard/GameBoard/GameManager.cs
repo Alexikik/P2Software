@@ -54,10 +54,7 @@ namespace GameBoard
 
             currentPlayer = chooseStartingPlayer();
 
-            Ludo.ControlPanel.piecebtnOne.Enabled = false;
-            Ludo.ControlPanel.piecebtnTwo.Enabled = false;
-            Ludo.ControlPanel.piecebtnThree.Enabled = false;
-            Ludo.ControlPanel.piecebtnFour.Enabled = false;
+            Ludo.ControlPanel.enableOrDisablePieceButtons(false);
             Ludo.ControlPanel.turnCount.Text = $"Turn: {turnCount}";
         }
 
@@ -72,10 +69,7 @@ namespace GameBoard
 
             currentPlayer = chooseStartingPlayer();
 
-            Ludo.ControlPanel.piecebtnOne.Enabled = false;
-            Ludo.ControlPanel.piecebtnTwo.Enabled = false;
-            Ludo.ControlPanel.piecebtnThree.Enabled = false;
-            Ludo.ControlPanel.piecebtnFour.Enabled = false;
+            Ludo.ControlPanel.enableOrDisablePieceButtons(false);
             Ludo.ControlPanel.turnCount.Text = $"Turn: {turnCount}";
 
             if (currentPlayer is Xela)
@@ -135,8 +129,7 @@ namespace GameBoard
 
             int randValue = seed.Next(4);
 
-            //return players[randValue];
-            return players[0];
+            return players[randValue];
         }
 
         public string currentPlayerString(AllPlayers player)
@@ -169,11 +162,7 @@ namespace GameBoard
             {
                 currentPlayerExtraTurn = false;
 
-                Ludo.ControlPanel.dicebtn.Enabled = true;
-                Ludo.ControlPanel.piecebtnOne.Enabled = false;
-                Ludo.ControlPanel.piecebtnTwo.Enabled = false;
-                Ludo.ControlPanel.piecebtnThree.Enabled = false;
-                Ludo.ControlPanel.piecebtnFour.Enabled = false;
+                Ludo.ControlPanel.disableButtonsEnableDice();
 
                 if (players[currentPlayer.team - 1] is Xela)
                     giveTurnToXela();
@@ -189,11 +178,7 @@ namespace GameBoard
                     currentPlayerExtraTurn = false;
 
                     Ludo.ControlPanel.currentPlaytxt.Text = currentPlayerString(currentPlayer);
-                    Ludo.ControlPanel.dicebtn.Enabled = true;
-                    Ludo.ControlPanel.piecebtnOne.Enabled = false;
-                    Ludo.ControlPanel.piecebtnTwo.Enabled = false;
-                    Ludo.ControlPanel.piecebtnThree.Enabled = false;
-                    Ludo.ControlPanel.piecebtnFour.Enabled = false;
+                    Ludo.ControlPanel.disableButtonsEnableDice();
                     Ludo.ControlPanel.dice.Image = Image.FromFile("Images/Dice/DiceBlank.png");
 
                     turnCount++;
@@ -207,14 +192,10 @@ namespace GameBoard
                     endScreenShown = true;
                     diceRollsForCurrentPlayer = 0;
                     currentPlayerExtraTurn = false;
-                    
-                    Ludo.ControlPanel.dicebtn.Enabled = false;
-                    Ludo.ControlPanel.piecebtnOne.Enabled = false;
-                    Ludo.ControlPanel.piecebtnTwo.Enabled = false;
-                    Ludo.ControlPanel.piecebtnThree.Enabled = false;
-                    Ludo.ControlPanel.piecebtnFour.Enabled = false;
+
+                    Ludo.ControlPanel.disableAllButtons();
                     Ludo.ControlPanel.dice.Image = Image.FromFile("Images/Dice/DiceBlank.png");
-                    
+
                     if (!noMessageBox)
                         MessageBox.Show(getGameEndText());
                     Ludo.Close();   // Closes the ludo screen, after pressing OK to the messageBox
@@ -333,15 +314,9 @@ namespace GameBoard
             Ludo.ControlPanel.dicebtn.Enabled = false;
 
             if (currentPlayer is HumanPlayer)   // Enables buttons for humanplayer
-            {
-                foreach (Button btn in Ludo.ControlPanel.btnList)
-                    btn.Enabled = true;
-            }
+                Ludo.ControlPanel.enableOrDisablePieceButtons(true);
             else    // Disables buttons when Xela plays
-            {
-                foreach (Button btn in Ludo.ControlPanel.btnList)
-                    btn.Enabled = false;
-            }
+                Ludo.ControlPanel.enableOrDisablePieceButtons(false);
 
             // Finds the amount of unmovable pieces
             for (int i = 0; i < 4; i++)
@@ -385,8 +360,7 @@ namespace GameBoard
             {
                 if (currentPlayer is HumanPlayer)
                     Ludo.ControlPanel.dicebtn.Enabled = true;
-                for (int i = 0; i < 4; i++)
-                    Ludo.ControlPanel.btnList[i].Enabled = false;
+                Ludo.ControlPanel.enableOrDisablePieceButtons(false);
             }
             else if (diceValue == 5)  // If the player got a globus it gets an extra turn
             {

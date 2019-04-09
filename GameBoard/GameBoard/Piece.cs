@@ -59,5 +59,24 @@ namespace GameBoard
                     return "error";
             }
         }
+
+        public void setSizeAndLocation(int size, int x, int y, bool currentFieldsLocation)
+        {
+            picture.Size = new Size(size, size);
+            if (currentFieldsLocation)
+                setLocationDxDy(x, y);
+            else
+                setLocation(x, y);
+        }
+
+        public void setLocation(int x, int y)
+        {
+            picture.Location = new Point(x, y);
+        }
+
+        public void setLocationDxDy(int dx, int dy)
+        {
+            picture.Location = new Point(placement.x + dx, placement.y + dy);
+        }
     }
 }

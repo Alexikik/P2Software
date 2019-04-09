@@ -52,10 +52,12 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GoIntoGoalTest.cs" />
     <Compile Include="LudoRulesTest.cs" />
     <Compile Include="RollDiceTest.cs" />
     <Compile Include="TurnEndTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PathsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

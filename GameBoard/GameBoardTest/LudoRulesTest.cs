@@ -19,7 +19,7 @@ namespace GameBoardTest
         public void moveOtherPlayerHome()
         {
             //Arrange:
-            GameManager gameManager = new GameManager(0);
+            GameManager gameManager = new GameManager(0, true);
             gameManager.players[0].pieces[0].newField(gameManager.Ludo.boardFields[1]);
             gameManager.players[1].pieces[0].newField(gameManager.Ludo.boardFields[2]);
             gameManager.currentPlayer = gameManager.players[0];
@@ -38,7 +38,7 @@ namespace GameBoardTest
         public void savedOnGlobus()
         {
             //Arrange:
-            GameManager gameManager = new GameManager(0);
+            GameManager gameManager = new GameManager(0, true);
             gameManager.players[0].pieces[0].newField(gameManager.Ludo.boardFields[0]);
             gameManager.players[1].pieces[0].newField(gameManager.Ludo.boardFields[1]);
             gameManager.currentPlayer = gameManager.players[0];
@@ -59,7 +59,7 @@ namespace GameBoardTest
         public void jumpOnStar()
         {
             //Arrange:
-            GameManager gameManager = new GameManager(0);
+            GameManager gameManager = new GameManager(0, true);
             gameManager.players[0].pieces[0].newField(gameManager.Ludo.boardFields[0]);
             gameManager.currentPlayer = gameManager.players[0];
 
@@ -69,8 +69,8 @@ namespace GameBoardTest
 
             // Assert:
             Assert.AreEqual(12, gameManager.players[0].pieces[0].placement.index);
-            starField homeField = new starField(0, 0, 0);
-            Assert.IsInstanceOfType(gameManager.players[0].pieces[0].placement, homeField.GetType());
+            starField starField = new starField(0, 0, 0);
+            Assert.IsInstanceOfType(gameManager.players[0].pieces[0].placement, starField.GetType());
         }
     }
 }

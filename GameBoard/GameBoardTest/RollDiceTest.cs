@@ -26,7 +26,7 @@ namespace GameBoardTest
         private void TestRollDice()
         {
             // Arrange
-            GameManager gameManager = new GameManager(0);
+            GameManager gameManager = new GameManager(0, true);
             Piece piece = gameManager.players[0].pieces[0];
             gameManager.currentPlayer = piece.player;
             allFields field;
@@ -65,7 +65,7 @@ namespace GameBoardTest
         private void TestRollDiceOverEndList()
         {
             // Arrange
-            GameManager gameManager = new GameManager(0);
+            GameManager gameManager = new GameManager(0, true);
             Piece piece = gameManager.players[1].pieces[0];
             gameManager.currentPlayer = piece.player;
             allFields field;

@@ -32,7 +32,7 @@ namespace GameBoardTest
         private void TurnEnd(int playerNum, int pieceNum, int diceValue)
         {
             //Arrange:
-            GameManager gameManager = new GameManager(0);
+            GameManager gameManager = new GameManager(0, true);
             gameManager.players[playerNum].pieces[pieceNum].newField(gameManager.Ludo.boardFields[0]);
             gameManager.diceValue = diceValue;
             int newFieldIndex = diceValue + gameManager.players[playerNum].pieces[pieceNum].placement.index;
@@ -50,7 +50,7 @@ namespace GameBoardTest
         public void diceValu3Test()
         {
             //Arrange:
-            GameManager gameManager = new GameManager(0);
+            GameManager gameManager = new GameManager(0, true);
             gameManager.players[0].pieces[0].newField(gameManager.Ludo.boardFields[0]);
 
             //Act:
@@ -65,7 +65,7 @@ namespace GameBoardTest
         public void diceValue5Test()
         {
             //Arrange:
-            GameManager gameManager = new GameManager(0);
+            GameManager gameManager = new GameManager(0, true);
             gameManager.players[0].pieces[0].newField(gameManager.Ludo.boardFields[0]);
 
             //Act:
@@ -80,7 +80,7 @@ namespace GameBoardTest
         public void TurnEndGlobusOverEnd()
         {
             //Arrange:
-            GameManager gameManager = new GameManager(0);
+            GameManager gameManager = new GameManager(0, true);
             gameManager.players[1].pieces[0].newField(gameManager.Ludo.boardFields[48]);    // Second last field in boardFields 
             gameManager.currentPlayer = gameManager.players[1];
 
@@ -96,7 +96,7 @@ namespace GameBoardTest
         public void TurnEndStarOverEnd()
         {
             //Arrange:
-            GameManager gameManager = new GameManager(0);
+            GameManager gameManager = new GameManager(0, true);
             gameManager.players[1].pieces[0].newField(gameManager.Ludo.boardFields[48]);    // Second last field in boardFields
             gameManager.currentPlayer = gameManager.players[1];
 

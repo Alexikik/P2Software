@@ -39,7 +39,7 @@ namespace GameBoard
 
             for (int i = 0; i < 4; i++)
             {
-                text += $"{currentPlayerString(i+1)}:\n" +
+                text += $"{currentPlayerString(i)}:\n" +
                     $"  1'st: {playersPlacements[i][0]}\n" +
                     $"  2'nd: {playersPlacements[i][1]}\n" +
                     $"  3'rd: {playersPlacements[i][2]}\n" +
@@ -53,13 +53,13 @@ namespace GameBoard
         {
             switch (player)
             {
-                case 1:
+                case 0:
                     return "Green";
-                case 2:
+                case 1:
                     return "Red";
-                case 3:
+                case 2:
                     return "Blue";
-                case 4:
+                case 3:
                     return "Yellow";
                 default:
                     return "Error";

@@ -64,53 +64,6 @@ namespace GameBoard
             }
         }
 
-
-        private int canKnockHomePiece(Piece p)
-        {
-            allFields field;
-            int moves = gameManager.diceValue;
-            if (p.placement.index + moves >= gameManager.Ludo.boardFields.Count)
-            {
-                int remainingMoves = moves - (gameManager.Ludo.boardFields.Count - p.placement.index);
-                field = gameManager.Ludo.boardFields[remainingMoves];
-            }
-            else
-                field = gameManager.Ludo.boardFields[p.placement.index + gameManager.diceValue];
-
-            if (field is starField)
-                field = gameManager.Ludo.boardFields[gameManager.Ludo.findNextStar(p, gameManager.diceValue, true)];
-
-            List<Piece> pieces = gameManager.Ludo.findPiecesAtField(field);
-
-            if (pieces.Count != 0 && field is globeField)
-            {
-                if (pieces[0].player.team == p.player.team)
-                    return 0;
-                else
-                    return -1;
-            }
-
-            switch (pieces.Count)
-            {
-                case 0:
-                    return 0;
-                case 1:
-                    if (pieces[0].player.team == p.player.team)
-                        return 0;
-                    else
-                        return 1;
-                case 2:
-                case 3:
-                case 4:
-                    if (pieces[0].player.team == p.player.team)
-                        return 0;
-                    else
-                        return -1;
-                default:
-                    return 0;
-            }
-        }
-
         private int calculateBestMove()
         {
             int bestPieceToMove = 0;
@@ -149,12 +102,27 @@ namespace GameBoard
                 case Behavior.Aggresive:
                     return Aggressive(p, field);
                 case Behavior.Passive:
-                    return Passive(p, field);
+                    return Passive(p);
                 case Behavior.Tactical:
                     return Aggressive(p, field);
             }
 
             return 1;
+        }
+
+        double Passive(Piece p)
+        {
+            double points = 0;
+            if (p.placement is homeField)
+                points += 1;
+            else
+            {
+                Random rnd = new Random();  // The seed for the dice is made here
+                points += rnd.Next(10) + 1;
+            }
+
+            return points;
+
         }
 
         double Aggressive(Piece p, allFields f)
@@ -163,278 +131,122 @@ namespace GameBoard
 
             allFields field = f;
 
-            if (p.placement is homeField == false)
+            if (field is starField || gameManager.diceValue == 3)
+                field = gameManager.Ludo.boardFields[gameManager.Ludo.findNextStar(p, 6, true)];
+
+            if(p.placement is homeField == false )
             {
-
-                if (gameManager.diceValue == 3 || field is starField)
+                if(ChaseChecker(p, field.index, 10) > 0) //Piece is being chased
                 {
-                    field = gameManager.Ludo.boardFields[gameManager.Ludo.findNextStar(p, 6, true)];
+                    points -= (GetProgress(p, field) * ChaseChecker(p, field.index, 10) * 2 + 20);
                 }
-
-                if (field.index - p.placement.index > 0)
+                if(CanKill(p, field) > 0)
                 {
-                    points = field.index - p.placement.index;
+                    points += CanKill(p, field);
                 }
-                else
+                if(ChaseChecker(p, p.placement.index, 10) > 0)
                 {
-                    points = gameManager.Ludo.boardFields.Count + field.index - p.placement.index;
+                    if(p.placement is globeField == false)
+                    points += (GetProgress(p, p.placement) * ChaseChecker(p, p.placement.index, 10) * 2 + 20);
                 }
-
-                if(f is goalField)
-                {
-                    if(p.placement is goalField)
-                    {
-                        points = 1;
-                    }
-                    else
-                    {
-                        if (ChaseChecker(p, field.index, 6))
-                        {
-                            if (p.placement.index - gameManager.Ludo.GetHomeField(this) > 0)
-                            {
-                                points += p.placement.index - gameManager.Ludo.GetHomeField(this);
-                                points = points * 0.3f;
-                            }
-                            else
-                            {
-                                points += (gameManager.Ludo.boardFields.Count + p.placement.index - gameManager.Ludo.GetHomeField(this));
-                                points = points * 0.3f;
-                            }
-                        }
-                    }
-                }
-
-                if (gameManager.Ludo.findPiecesAtField(field).Count > 0)
-                {
-                    if (field.team != team)
-                    {
-                        AllPlayers player = gameManager.Ludo.findPiecesAtField(field)[0].player;
-                        if (field.index - gameManager.Ludo.GetHomeField(player) > 0)
-                        {
-                            points = field.index - gameManager.Ludo.GetHomeField(player);
-                        }
-                        else
-                        {
-                            points = (gameManager.Ludo.boardFields.Count + field.index - gameManager.Ludo.GetHomeField(player) / 1);
-                        }
-                        Console.WriteLine(gameManager.currentPlayerString(this) + "Knocked Home: " + gameManager.currentPlayerString(player));
-                        //points = 25;
-                    }
-                }
-
-                if(ChaseChecker(p, field.index, 6))
-                {
-                    if (field.index - gameManager.Ludo.GetHomeField(this) > 0)
-                    {
-                        points -= field.index - gameManager.Ludo.GetHomeField(this);
-                        points = points * 0.3f;
-                    }
-                    else
-                    {
-                        points -= (gameManager.Ludo.boardFields.Count + field.index - gameManager.Ludo.GetHomeField(this));
-                        points = points * 0.3f;
-                    }
-                }
-
-                if (ChaseChecker(p, p.placement.index, 6))
-                {
-                    if (field.index - gameManager.Ludo.GetHomeField(this) > 0)
-                    {
-                        points = field.index - gameManager.Ludo.GetHomeField(this);
-                        points = points * 0.3f;
-                    }
-                    else
-                    {
-                        points = (gameManager.Ludo.boardFields.Count + field.index - gameManager.Ludo.GetHomeField(this));
-                    }
-                }
-
-                if (p.placement is starField)
-                {
-                    if(ChaseChecker(p, (gameManager.Ludo.findNextStar(p, 0, false)), 6))
-                    {
-                        if (field.index - gameManager.Ludo.GetHomeField(this) > 0)
-                        {
-                            points = field.index - gameManager.Ludo.GetHomeField(this);
-                            points = points * 0.3f;
-                        }
-                        else
-                        {
-                            points = gameManager.Ludo.boardFields.Count + field.index - gameManager.Ludo.GetHomeField(this);
-                            points = points * 0.3f;
-                        }
-                    }
-                }
-
+                points += MovePoints(p, field);
             }
-
             else
             {
-                if (gameManager.diceValue == 6 || gameManager.diceValue == 5)
-                {
-                    points = 10;
-                }
+                points += 30;
             }
+           
+
 
             return points;
 
         }
 
-        double Passive(Piece p, allFields f)
+        double MovePoints(Piece p, allFields field)
         {
             double points = 0;
-
-            allFields field = f;
-
-            if (p.placement is homeField == false)
+            if (field.index - p.placement.index > 0)
             {
-
-                if (gameManager.diceValue == 3 || field is starField)
-                {
-                    field = gameManager.Ludo.boardFields[gameManager.Ludo.findNextStar(p, 6, true)];
-                }
-
-                if (field.index - p.placement.index > 0)
-                {
-                    points = field.index - p.placement.index;
-                }
-                else
-                {
-                    points = gameManager.Ludo.boardFields.Count + field.index - p.placement.index;
-                }
-
-                if (f is goalField)
-                {
-                    if (p.placement is goalField)
-                    {
-                        points = 1;
-                    }
-                    else
-                    {
-                        if (ChaseChecker(p, field.index, 6))
-                        {
-                            if (p.placement.index - gameManager.Ludo.GetHomeField(this) > 0)
-                            {
-                                points += p.placement.index - gameManager.Ludo.GetHomeField(this);
-                            }
-                            else
-                            {
-                                points += (gameManager.Ludo.boardFields.Count + p.placement.index - gameManager.Ludo.GetHomeField(this));
-                            }
-                        }
-                    }
-                }
-
-                if (gameManager.Ludo.findPiecesAtField(field).Count > 0)
-                {
-                    if (field.team != team)
-                    {
-                        AllPlayers player = gameManager.Ludo.findPiecesAtField(field)[0].player;
-                        if (field.index - gameManager.Ludo.GetHomeField(player) > 0)
-                        {
-                            points = (field.index - gameManager.Ludo.GetHomeField(player)/3);
-                        }
-                        else
-                        {
-                            points = ((gameManager.Ludo.boardFields.Count + field.index - gameManager.Ludo.GetHomeField(player))/3);
-                        }
-                        Console.WriteLine(gameManager.currentPlayerString(this) + "Knocked Home: " + gameManager.currentPlayerString(player));
-                        //points = 25;
-                    }
-                }
-
-                if (ChaseChecker(p, field.index, 6))
-                {
-                    if (field.index - gameManager.Ludo.GetHomeField(this) > 0)
-                    {
-                        points -= field.index - gameManager.Ludo.GetHomeField(this);
-                        points = points * 1;
-                    }
-                    else
-                    {
-                        points -= (gameManager.Ludo.boardFields.Count + field.index - gameManager.Ludo.GetHomeField(this));
-                        points = points * 1;
-                    }
-                }
-
-                if (ChaseChecker(p, p.placement.index, 6))
-                {
-                    if (field.index - gameManager.Ludo.GetHomeField(this) > 0)
-                    {
-                        points = field.index - gameManager.Ludo.GetHomeField(this);
-                        points = points * 1;
-                    }
-                    else
-                    {
-                        points = (gameManager.Ludo.boardFields.Count + field.index - gameManager.Ludo.GetHomeField(this));
-                    }
-                }
-
-                if (p.placement is starField)
-                {
-                    if (ChaseChecker(p, (gameManager.Ludo.findNextStar(p, 0, false)), 6))
-                    {
-                        if (field.index - gameManager.Ludo.GetHomeField(this) > 0)
-                        {
-                            points = field.index - gameManager.Ludo.GetHomeField(this);
-                            points = points * 1;
-                        }
-                        else
-                        {
-                            points = gameManager.Ludo.boardFields.Count + field.index - gameManager.Ludo.GetHomeField(this);
-                            points = points * 1;
-                        }
-                    }
-                }
-
+                points += field.index - p.placement.index;
             }
-
             else
             {
-                if (gameManager.diceValue == 6 || gameManager.diceValue == 5)
-                {
-                    points = 10;
-                }
+                points += gameManager.Ludo.boardFields.Count + field.index - p.placement.index;
             }
 
+            if (field is pathField)
+                points += 100;
             return points;
+        }
+
+        int GetProgress(Piece p, allFields field)
+        {
+            int progress = 0;
+            if (field.index - gameManager.Ludo.GetHomeField(this) >= 0)
+                progress = field.index - gameManager.Ludo.GetHomeField(this);
+            else
+            {
+                progress = gameManager.Ludo.boardFields.Count + field.index - gameManager.Ludo.GetHomeField(this);
+            }
+
+            return progress;
 
         }
 
 
-
-        bool ChaseChecker(Piece p, int fieldId, int fieldsToCheck)
+        double ChaseChecker(Piece p, int fieldId, int fieldsToCheck)
         {
             int field = fieldId;
-            for (int i = 1; i < fieldsToCheck; i++)
+            int playersInRange = 0;
+            double probability = 0;
+            for (int i = 1; i <= fieldsToCheck; i++)
             {
                 if (field - i < 0)
                 {
                     int remainingMoves = ((gameManager.Ludo.boardFields.Count + field) - i);
                     field = gameManager.Ludo.boardFields[remainingMoves].index;
-                    if (gameManager.Ludo.findPiecesAtField(gameManager.Ludo.boardFields[field]).Count > 0)
-                    {
-                        if (gameManager.Ludo.findPiecesAtField(gameManager.Ludo.boardFields[field])[0].player.team != team)
-                        {
-                            return true;
-                        }
-                    }
                 }
                 else
                 {
                     field = gameManager.Ludo.boardFields[field - i].index;
-                    if (gameManager.Ludo.findPiecesAtField(gameManager.Ludo.boardFields[field]).Count > 0)
+                }
+
+                if(gameManager.Ludo.findPiecesAtField(gameManager.Ludo.boardFields[field]).Count > 0)
+                {
+                    if (gameManager.Ludo.findPiecesAtField(gameManager.Ludo.boardFields[field])[0].player.team != team)
                     {
                         if (gameManager.Ludo.findPiecesAtField(gameManager.Ludo.boardFields[field])[0].player.team != team)
-                        {
-                            return true;
-                        }
+                        playersInRange++;
+                    }
+                }
+
+            }
+
+            probability = playersInRange;
+
+            return probability;
+
+
+        }
+
+        double CanKill(Piece p, allFields field)
+        {
+            double points = 0;
+
+            if(gameManager.Ludo.findPiecesAtField(field).Count > 0)
+            {
+                if (gameManager.Ludo.findPiecesAtField(field)[0].player.team != team)
+                {
+                    if (gameManager.Ludo.findPiecesAtField(field).Count < 2)
+                    {
+                        Piece piece = gameManager.Ludo.findPiecesAtField(field)[0];
+                        points += GetProgress(piece, piece.placement);
                     }
                 }
             }
 
+            return points;
 
-            return false;
         }
 
         private List<Piece> moveablePieces()

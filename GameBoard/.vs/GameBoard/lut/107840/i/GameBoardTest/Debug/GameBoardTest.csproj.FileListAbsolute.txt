@@ -1,2 +1,0 @@
-C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\0\i\GameBoardTest\Debug\GameBoardTest.csprojAssemblyReference.cache
-C:\Users\Alexi\Documents\GitHub\P2Software\GameBoard\.vs\GameBoard\lut\0\i\GameBoardTest\Debug\GameBoardTest.csproj.CoreCompileInputs.cache

@@ -65,7 +65,7 @@ namespace GameBoard
         {
             players.Add(new Xela(1, Ludo, Xela.Behavior.Passive));
             players.Add(new Xela(2, Ludo, Xela.Behavior.Passive));
-            players.Add(new Xela(3, Ludo, Xela.Behavior.Passive));
+            players.Add(new Xela(3, Ludo, Xela.Behavior.Aggresive));
             players.Add(new Xela(4, Ludo, Xela.Behavior.Aggresive));
 
             Ludo.SetupControls();

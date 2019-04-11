@@ -17,6 +17,8 @@ namespace GameBoard
         public enum Behavior { Aggresive, Passive, Tactical };
         public Behavior myBehavior;
 
+        public int chaser;
+
         public Xela(int teamIn, GameBoard gameBoard, Behavior behavior) : base(teamIn, gameBoard)
         {
             allPlayers = gameBoard.players;
@@ -50,10 +52,12 @@ namespace GameBoard
                     notDone = false;
                 else
                 {
+                    Console.WriteLine($"    {gameManager.currentPlayerString(gameManager.currentPlayer)} \n" +
+                       $"    Dice: [{gameManager.diceValue}] DiceRolls: {gameManager.diceRollsForCurrentPlayer} ");   // Prints best move
+
                     bestPieceToMove = calculateBestMove() + 1;  // Finds best move
 
-                    Console.WriteLine($"    {gameManager.currentPlayerString(gameManager.currentPlayer)} \n" +
-                        $"    Dice: [{gameManager.diceValue}] Piece: {bestPieceToMove} DiceRolls: {gameManager.diceRollsForCurrentPlayer} Behavior: {myBehavior}");   // Prints best move
+                   
 
                     gameManager.turnEnd(bestPieceToMove);   // Does best move
 
@@ -75,10 +79,11 @@ namespace GameBoard
 
             foreach (Piece p in moveablePiecesList)
             {
-                Console.WriteLine("Score" + GetScore(p) + " : " + p.number);
-                if (GetScore(p) > score)
+                double scoreP = GetScore(p);
+                Console.WriteLine("Piece: " + (p.number + 1) + "..." + " Score: " + scoreP);
+                if (scoreP > score)
                 {
-                    score = GetScore(p);
+                    score = scoreP;
                     bestPieceToMove = p.number;
                 }
             }
@@ -102,7 +107,7 @@ namespace GameBoard
                 case Behavior.Aggresive:
                     return Aggressive(p, field);
                 case Behavior.Passive:
-                    return Passive(p);
+                    return Aggressive(p, field);
                 case Behavior.Tactical:
                     return Aggressive(p, field);
             }
@@ -174,6 +179,9 @@ namespace GameBoard
                 points += gameManager.Ludo.boardFields.Count + field.index - p.placement.index;
             }
 
+            if (field is globeField)
+                points += 10;
+
             if (field is pathField)
                 points += 100;
             return points;
@@ -221,6 +229,8 @@ namespace GameBoard
                 }
 
             }
+
+            chaser = playersInRange;
 
             probability = playersInRange;
 
